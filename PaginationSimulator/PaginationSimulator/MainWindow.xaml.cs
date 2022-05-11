@@ -24,6 +24,7 @@ namespace PaginationSimulator
         
         public MainWindow()
         {
+            
             InitializeComponent();
         }
 
