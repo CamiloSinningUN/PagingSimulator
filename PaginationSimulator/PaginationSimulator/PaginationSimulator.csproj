@@ -101,5 +101,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skip to Start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="End.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Play.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

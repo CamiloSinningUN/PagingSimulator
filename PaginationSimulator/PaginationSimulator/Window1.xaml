@@ -5,8 +5,115 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PaginationSimulator"
         mc:Ignorable="d"
-        Title="Window1" Height="1024" Width="1440">
+        Title="Window1" Height="768" Width="1366">
     <Grid>
-        <Label Content="Instrucciones" HorizontalAlignment="Left" Height="36" Margin="10,23,0,0" VerticalAlignment="Top" Width="126" FontFamily="Arial" FontSize="20"/>
+        <Rectangle HorizontalAlignment="Left" Height="751" Stroke="Black" VerticalAlignment="Center" Width="277"/>
+        <ScrollBar HorizontalAlignment="Left" Height="30" Margin="258,382,0,0" VerticalAlignment="Top" Width="4" RenderTransformOrigin="-1.653,-0.658"/>
+        <Rectangle HorizontalAlignment="Left" Height="4" Margin="17,382,0,0" VerticalAlignment="Top" Width="237">
+            <Rectangle.Stroke>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Stroke>
+        </Rectangle>
+        <Label Content="Bitacora" HorizontalAlignment="Left" Margin="68,394,0,0" VerticalAlignment="Top" Height="40" Width="150" FontSize="30" Foreground="#FF3A0CA3" FontFamily="Arial Black"/>
+        <TextBox HorizontalAlignment="Left" Height="132" Margin="69,435,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="148" BorderBrush="#FF0A0E17"/>
+        <Label Content="Velocidad" HorizontalAlignment="Left" Height="36" Margin="69,599,0,0" VerticalAlignment="Top" Width="151" FontSize="25" FontFamily="Arial Black"/>
+        <TextBox HorizontalAlignment="Left" Height="35" Margin="96,639,0,0" TextWrapping="Wrap" Text="x10" VerticalAlignment="Top" Width="84" BorderBrush="#FF020202" FontSize="20" Foreground="#FF6D6969" FontWeight="Bold"/>
+        <Button Content="" HorizontalAlignment="Left" Height="34" Margin="32,640,0,0" VerticalAlignment="Top" Width="48" RenderTransformOrigin="1.146,0.472" BorderBrush="#FF080606">
+            <Button.Background>
+                <ImageBrush ImageSource="/Skip to Start.png"/>
+            </Button.Background>
+        </Button>
+        <Button Content="" HorizontalAlignment="Left" Height="34" Margin="194,638,0,0" VerticalAlignment="Top" Width="48" RenderTransformOrigin="-0.542,0.619" BorderBrush="#FF0C0707">
+            <Button.Background>
+                <ImageBrush ImageSource="/End.png"/>
+            </Button.Background>
+        </Button>
+        <Button HorizontalAlignment="Left" Height="34" Margin="12,700,0,0" VerticalAlignment="Top" Width="153" Background="#FF4361EE">
+            <Image HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="47">
+                <Image.OpacityMask>
+                    <ImageBrush ImageSource="/End.png"/>
+                </Image.OpacityMask>
+            </Image>
+        </Button>
+        <ComboBox HorizontalAlignment="Left" Height="35" Margin="182,700,0,0" VerticalAlignment="Top" Width="75" BorderBrush="#FF4361EE" Background="#FF4361EE" SelectionChanged="ComboBox_SelectionChanged">
+            <ComboBoxItem Background="#FF4361EE" Content="LRU"/>
+            <ComboBoxItem Background="#FF4361EE" Content="FIFO"/>
+        </ComboBox>
+        <Label Content="Instrucciones" HorizontalAlignment="Left" Height="44" Margin="46,-2,0,0" VerticalAlignment="Top" Width="195" FontSize="24" FontFamily="Arial Black" Foreground="#FF3A0CA3"/>
+
+        <FlowDocumentReader Margin="-5,10,1,74">
+            <FlowDocument>
+
+                <Table CellSpacing="1">
+
+                    <Table.Columns>
+                        <TableColumn/>
+                        <TableColumn/>
+                    </Table.Columns>
+
+                    <TableRowGroup>
+
+                        
+
+                        <!-- Header row for the table. -->
+                        <TableRow Background="#0C1B1B19">
+                            <TableCell>
+                                <Paragraph FontSize="14pt" FontWeight="Bold">Dir Logica</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph FontSize="14pt" FontWeight="Bold">Lect/Esc</Paragraph>
+                            </TableCell>
+                        </TableRow>
+
+
+
+                        <!-- Four data rows for the inner planets. -->
+                        <TableRow Background="White">
+                            <TableCell>
+                                <Paragraph>Mercury</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>57,910,000 km</Paragraph>
+                            </TableCell>
+                          
+                        </TableRow>
+                        <TableRow Background="white">
+                            <TableCell>
+                                <Paragraph>Venus</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>108,200,000 km</Paragraph>
+                            </TableCell>
+                         
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Paragraph>Earth</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>149,600,000 km</Paragraph>
+                            </TableCell>
+                            
+                        </TableRow>
+                        <TableRow Background="White">
+                            <TableCell>
+                                <Paragraph>Mars</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>227,940,000 km</Paragraph>
+                            </TableCell>
+                            
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </FlowDocument>
+        </FlowDocumentReader>
+
+
     </Grid>
+    
+    
 </Window>
