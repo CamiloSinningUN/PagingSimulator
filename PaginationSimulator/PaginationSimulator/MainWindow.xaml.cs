@@ -20,6 +20,8 @@ namespace PaginationSimulator
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -27,7 +29,8 @@ namespace PaginationSimulator
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //no hago nada
+            Window1 subWindow = new Window1();
+            subWindow.Show();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
