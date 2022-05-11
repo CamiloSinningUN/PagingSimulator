@@ -10,12 +10,40 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition Width="0*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Rectangle Grid.ColumnSpan="3" Fill="#00F4F4F5" HorizontalAlignment="Left" Height="679" Margin="425,230,0,0" Stroke="Black" VerticalAlignment="Top" Width="585" RadiusX="10" RadiusY="10"/>
-
-        <Label Content="Paginación" HorizontalAlignment="Left" Margin="442,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.274,0.574" FontFamily="Fugaz One " Height="150" Width="538" FontSize="100" Foreground="#FF3A0CA3" Grid.Column="2"/>
+        <Rectangle Fill="#00F4F4F5" Margin="423,230,423,84" Stroke="Black" RadiusX="10" RadiusY="10" Grid.Column="2" MinWidth="588" MinHeight="679"/>
         <Label Content="Simulador" HorizontalAlignment="Left" Margin="658,197,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.274,0.574" FontFamily="Fugaz One " Height="89" Width="352" FontSize="60" Foreground="#99000000" Grid.Column="2"/>
+        <Label Content="Paginación" Margin="442,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.274,0.574" FontFamily="Fugaz One " Height="150" FontSize="100" Foreground="#FF3A0CA3" Grid.Column="2" HorizontalAlignment="Left" Width="544"/>
+        <Label Grid.ColumnSpan="3" Content="Tamaño marco/página" HorizontalAlignment="Left" Margin="471,302,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30"/>
+        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="63" Margin="471,356,0,574" TextWrapping="Wrap" VerticalAlignment="Center" Width="363" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+        <Label Grid.ColumnSpan="3" Content="Tamaño sistema operativo" HorizontalAlignment="Left" Margin="471,424,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30"/>
+        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="63" Margin="471,478,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center"/>
+        <Label Grid.ColumnSpan="3" Content="Tamaño proceso" HorizontalAlignment="Left" Margin="471,546,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30"/>
+        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="63" Margin="471,600,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center"/>
+        <Label Grid.ColumnSpan="3" Content="Tamaño memoria principal" HorizontalAlignment="Left" Margin="471,670,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30"/>
+        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="63" Margin="471,724,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center"/>
+        <Button Content="INICIAR" HorizontalAlignment="Left" Margin="472,813,0,0" VerticalAlignment="Top" Width="494" Height="64" FontFamily="Fugaz one" Background="#FF4361EE" Foreground="White" FontSize="30" Click="Button_Click" Grid.ColumnSpan="3"/>
+        <ComboBox Grid.ColumnSpan="3" Margin="856,356,468,574" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="110" Height="63">
+            <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </ComboBox>
+        <ComboBox Grid.ColumnSpan="3" Margin="856,478,468,452" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="110" Height="63">
+            <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </ComboBox>
+        <ComboBox Grid.ColumnSpan="3" Margin="856,600,468,330" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="110" Height="63">
+            <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </ComboBox>
+        <ComboBox Grid.ColumnSpan="3" Margin="856,724,468,206" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="110" Height="63">
+            <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </ComboBox>
 
     </Grid>
 </Window>
