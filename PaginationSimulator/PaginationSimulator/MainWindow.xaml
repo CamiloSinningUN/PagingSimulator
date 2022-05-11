@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="768
         " Width="1366" WindowState="Maximized">
+
     <DockPanel HorizontalAlignment="Center" Height="737" LastChildFill="False" VerticalAlignment="Center" Width="1358">
         <Grid RenderTransformOrigin="0.504,0.55" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Rectangle Fill="#00F4F4F5" Margin="403,124,391,28" Stroke="Black" RadiusX="10" RadiusY="10"/>
@@ -14,34 +15,65 @@
             <Label Content="Paginación" Margin="413,14,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.274,0.574" FontFamily="Fugaz One " Height="152" FontSize="100" Foreground="#FF3A0CA3" HorizontalAlignment="Left" Width="549"/>
             <Label Content="Tamaño marco/página" HorizontalAlignment="Left" Margin="467,171,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30" Height="45" Width="358"/>
             <Label Content="Tamaño sistema operativo" HorizontalAlignment="Left" Margin="467,272,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30" Height="44" Width="435"/>
-            <TextBox HorizontalAlignment="Left" Height="52" Margin="467,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center"/>
             <Label Content="Tamaño proceso" HorizontalAlignment="Left" Margin="467,372,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30" Height="44" Width="320"/>
-            <TextBox HorizontalAlignment="Left" Height="52" Margin="467,416,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center"/>
             <Label Content="Tamaño memoria principal" HorizontalAlignment="Left" Margin="467,474,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30" Height="45" Width="409"/>
-            <TextBox HorizontalAlignment="Left" Height="52" Margin="467,519,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center"/>
-            <Button Content="INICIAR" HorizontalAlignment="Left" Margin="468,592,0,0" VerticalAlignment="Top" Width="435" Height="53" FontFamily="Fugaz one" Background="#FF4361EE" Foreground="White" FontSize="30" Click="Button_Click"/>
-            <ComboBox Margin="806,0,455,465" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" HorizontalAlignment="Center" Width="97" Height="51" VerticalAlignment="Bottom">
+            <TextBox HorizontalAlignment="Left" Height="52" Margin="467,519,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center">
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Button Content="INICIAR" HorizontalAlignment="Left" Margin="468,602,0,0" VerticalAlignment="Top" Width="435" Height="61" FontFamily="Fugaz one" Background="#FF4361EE" Foreground="White" FontSize="30" Click="Button_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <ComboBox Margin="806,0,455,465" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" HorizontalAlignment="Center" Width="97" Height="51" VerticalAlignment="Bottom" SelectedIndex="1">
                 <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </ComboBox>
-            <ComboBox Margin="806,316,455,369" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="97" Height="52">
+            <ComboBox Margin="806,316,455,369" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="97" Height="52" SelectedIndex="1">
                 <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </ComboBox>
-            <ComboBox Margin="806,416,455,269" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="97" Height="52">
+            <ComboBox Margin="806,416,455,269" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="97" Height="52" SelectedIndex="1">
                 <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </ComboBox>
-            <ComboBox Margin="806,519,455,166" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="97" Height="52">
+            <ComboBox Margin="806,519,455,166" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="97" Height="52" SelectedIndex="1">
                 <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </ComboBox>
-            <TextBox HorizontalAlignment="Left" Margin="468,220,0,465" TextWrapping="Wrap" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center"/>
+            <TextBox HorizontalAlignment="Left" Height="52" Margin="467,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <TextBox HorizontalAlignment="Left" Height="52" Margin="467,416,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <TextBox HorizontalAlignment="Left" Height="52" Margin="468,315,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
 
         </Grid>
     </DockPanel>
+    
 </Window>
