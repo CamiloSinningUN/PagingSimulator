@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PaginationSimulator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="1024" Width="1440">
+    <Grid RenderTransformOrigin="0.504,0.55">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Grid.ColumnSpan="3" Fill="#00F4F4F5" HorizontalAlignment="Left" Height="679" Margin="425,230,0,0" Stroke="Black" VerticalAlignment="Top" Width="585" RadiusX="10" RadiusY="10"/>
+
+        <Label Content="Paginación" HorizontalAlignment="Left" Margin="442,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.274,0.574" FontFamily="Fugaz One " Height="150" Width="538" FontSize="100" Foreground="#FF3A0CA3" Grid.Column="2"/>
+        <Label Content="Simulador" HorizontalAlignment="Left" Margin="658,197,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.274,0.574" FontFamily="Fugaz One " Height="89" Width="352" FontSize="60" Foreground="#99000000" Grid.Column="2"/>
+
     </Grid>
 </Window>

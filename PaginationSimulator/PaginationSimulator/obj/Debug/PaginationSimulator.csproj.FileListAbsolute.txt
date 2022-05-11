@@ -1,0 +1,15 @@
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\bin\Debug\PaginationSimulator.exe.config
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\bin\Debug\PaginationSimulator.exe
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\bin\Debug\PaginationSimulator.pdb
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.csproj.AssemblyReference.cache
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\MainWindow.g.cs
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\App.g.cs
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator_MarkupCompile.cache
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator_MarkupCompile.lref
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\MainWindow.baml
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.g.resources
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.Properties.Resources.resources
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.csproj.GenerateResource.cache
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.csproj.CoreCompileInputs.cache
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.exe
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.pdb
