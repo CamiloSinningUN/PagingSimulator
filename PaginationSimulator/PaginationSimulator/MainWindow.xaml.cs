@@ -31,6 +31,7 @@ namespace PaginationSimulator
         {
             Window1 subWindow = new Window1();
             subWindow.Show();
+            this.Hide();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
