@@ -33,3 +33,5 @@ C:\Users\Eliana V\Documents\GitHub\Lab_SO\PaginationSimulator\PaginationSimulato
 C:\Users\Eliana V\Documents\GitHub\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.pdb
 C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\Window1.g.cs
 C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\Window1.baml
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PopUpFinish.g.cs
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PopUpFinish.baml

@@ -1,0 +1,22 @@
+﻿<Window x:Class="PaginationSimulator.PopUpFinish"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PaginationSimulator"
+        mc:Ignorable="d"
+        Title="PopUpFinish" Height="360" Width="507" WindowStyle="None" >
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" Height="342" VerticalAlignment="Top" Width="499">
+            <Label Content="Resumen" FontFamily="Fugaz one" FontSize="80" Foreground="#FF3A0CA3" HorizontalContentAlignment="Center" Height="100" VerticalContentAlignment="Center"/>
+            <Label Content="Número de reemplazos" FontFamily="Fugaz one" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <TextBox Height="52" TextWrapping="Wrap" Text="50" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Fugaz one" FontSize="20" Background="#FFF3F3F3" Margin="200,0"/>
+            <Label>
+                <Label Content="Número de Fallos" FontFamily="Fugaz one" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="499"/>
+            </Label>
+            <TextBox Height="52" TextWrapping="Wrap" Text="20" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Fugaz one" FontSize="20" Background="#FFF3F3F3" Margin="200,0"/>
+            <Button Content="OK" Click="Button_Click" Height="36" Margin="0,13,0,0" Width="300" Background="#FF4361EE" Foreground="White" FontFamily="Fugaz one" FontSize="20"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
