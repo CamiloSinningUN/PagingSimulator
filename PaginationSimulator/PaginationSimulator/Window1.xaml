@@ -8,6 +8,9 @@
         mc:Ignorable="d"
         Title="Window1" Height="768" Width="1366" WindowState="Maximized">
     <Window.Resources>
+        <Image x:Key="Play" Source="Play.png"  Width="40" Height="40"/>
+        <Image x:Key="Pause" Source="Pause.png"  Width="40" Height="40"/>
+        <Image x:Key="Reset" Source="Reset.png"  Width="40" Height="40"/>
         <Style TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Height" Value="35" />
@@ -451,48 +454,42 @@
                         <ColumnDefinition Width="5*"/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <Border BorderThickness="1" Height="64" CornerRadius="10" Grid.Column="0"  Background="#FF4361EE" Margin="0,0,10,0">
-                        <Button BorderBrush="{x:Null}" Width="160" >
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Background" Value="Green"/>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border Background="{TemplateBinding Background}">
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-
-                                </Style>
-                            </Button.Style>
-                            <Button.Background>
-                                <ImageBrush ImageSource="Play.png" Stretch="None">
-                                    <ImageBrush.RelativeTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.75" ScaleY="0.75"/>
-                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                            <RotateTransform CenterY="0.5" CenterX="0.5"/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </ImageBrush.RelativeTransform>
-                                </ImageBrush>
-                            </Button.Background>
-                        </Button>
-                    </Border>
-                    <ComboBox Margin="0" BorderBrush="Black" FontFamily="Fugaz one" FontSize="30" Background="#FF4361EE" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" SelectedIndex="1" Style="{DynamicResource borderRadius}" Grid.Column="1" Foreground="White">
+                    <Button x:Name="play" Width="160" Height="64" Grid.Column="0"  Background="#FF4361EE" Margin="0,0,10,0" Foreground="{x:Null}" BorderBrush="{x:Null}" Click="play_Click">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                        <StaticResource ResourceKey="Play"/>
+                    </Button>
+                    <Button x:Name="pause" Width="160" Height="64" Grid.Column="0"  Background="#FF28AFB0" Margin="0,0,10,0" Foreground="{x:Null}" BorderBrush="{x:Null}"  Visibility="Hidden">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                        <StaticResource ResourceKey="Pause"/>
+                    </Button>
+                    <ComboBox x:Name="method" Margin="0" BorderBrush="Black" FontFamily="Fugaz one" FontSize="30" Background="#FF4361EE" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" SelectedIndex="1" Style="{DynamicResource borderRadius}" Grid.Column="1" Foreground="White">
                         <ComboBoxItem Content="LRU" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
                         <ComboBoxItem Content="FIFO" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
                         <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
                     </ComboBox>
+                    <Button x:Name="Reset"  Grid.Column="1"  Background="#FFFB3640" Margin="0" Foreground="{x:Null}" BorderBrush="{x:Null}" Visibility="Hidden" Click="reset_Click">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                        <StaticResource ResourceKey="Reset"/>
+                    </Button>
                 </Grid>
             </StackPanel>
         </Border>
         <Border BorderBrush="Black" BorderThickness="1" Height="225" VerticalAlignment="Bottom" DockPanel.Dock="Bottom">
             <Grid VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <ScrollViewer Name="c_dataGridScrollViewer"
@@ -526,7 +523,41 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>
-
+                <Expander Grid.Column="1"  ExpandDirection="Left" IsExpanded="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Height="115" VerticalAlignment="Center" Margin="0,0,0,6">
+                    <Expander.Header>
+                        <TextBlock Text="Especificaciones">
+                            <TextBlock.LayoutTransform>
+                                <RotateTransform Angle="-90"/>
+                            </TextBlock.LayoutTransform>
+                        </TextBlock>
+                    </Expander.Header>
+                    <Border BorderThickness="1" CornerRadius="10,0,0,10">
+                        <DataGrid HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <DataGrid.LayoutTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="-90"/>
+                                </TransformGroup>
+                            </DataGrid.LayoutTransform>
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="LayoutTransform">
+                                        <Setter.Value>
+                                            <TransformGroup>
+                                                <RotateTransform Angle="90"/>
+                                            </TransformGroup>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Ram"/>
+                                <DataGridTextColumn Header="proceso"/>
+                                <DataGridTextColumn Header="SO"/>
+                                <DataGridTextColumn Header="Marco"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                </Expander>
             </Grid>
         </Border>
         <Grid VerticalAlignment="Top">

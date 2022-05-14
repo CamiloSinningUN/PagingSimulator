@@ -121,5 +121,11 @@
   <ItemGroup>
     <Resource Include="Plus Math.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Reset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pause.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

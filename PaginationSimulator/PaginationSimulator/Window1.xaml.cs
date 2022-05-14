@@ -28,5 +28,21 @@ namespace PaginationSimulator
         {
 
         }
+
+        private void play_Click(object sender, RoutedEventArgs e)
+        {
+            play.Visibility = Visibility.Hidden;
+            method.Visibility = Visibility.Hidden;
+            pause.Visibility = Visibility.Visible;
+            Reset.Visibility = Visibility.Visible;
+        }
+
+        private void reset_Click(object sender, RoutedEventArgs e)
+        {
+            play.Visibility = Visibility.Visible;
+            method.Visibility = Visibility.Visible;
+            pause.Visibility = Visibility.Hidden;
+            Reset.Visibility = Visibility.Hidden;
+        }
     }
 }

@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("play.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("window1.xaml")]
 
 
