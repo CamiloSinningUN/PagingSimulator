@@ -110,22 +110,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Skip to Start.png" />
+    <Resource Include="assets\Skip to Start.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="End.png" />
+    <Resource Include="assets\End.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Play.png" />
+    <Resource Include="assets\Play.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Plus Math.png" />
+    <Resource Include="assets\Plus Math.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Reset.png" />
+    <Resource Include="assets\Reset.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Pause.png" />
+    <Resource Include="assets\Pause.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
