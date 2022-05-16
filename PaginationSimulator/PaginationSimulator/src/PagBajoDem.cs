@@ -41,18 +41,18 @@ namespace PaginationSimulator.src
         {
             // https://stackoverflow.com/questions/600293/how-to-check-if-a-number-is-a-power-of-2
             if ((tamMarco & (tamMarco - 1)) != 0)
-                throw new PagBajoDemException($"El tamaño de cada marco ({tamMarco} bytes) debe ser potencia de 2", MARCO_POW_OF_2_EXCEPTION);
+                throw new PagBajoDemException($"El tamaño de cada marco ({tamMarco} bytes) debe ser potencia de 2", PagBajoDemException.MARCO_POW_OF_2_EXCEPTION);
             if ((tamMP & (tamMP - 1)) != 0)
-                throw new PagBajoDemException($"El tamaño de la MP ({tamSO} bytes) debe ser potencia de 2", MP_POW_OF_2_EXCEPTION);
+                throw new PagBajoDemException($"El tamaño de la MP ({tamSO} bytes) debe ser potencia de 2", PagBajoDemException.MP_POW_OF_2_EXCEPTION);
             if (tamSO > tamMP)
-                throw new PagBajoDemException($"El tamaño del SO ({tamSO} bytes) no puede ser mayor al de la MP ({tamMP} bytes)", SO_EXCEPTION);
+                throw new PagBajoDemException($"El tamaño del SO ({tamSO} bytes) no puede ser mayor al de la MP ({tamMP} bytes)", PagBajoDemException.SO_EXCEPTION);
             if (tamProc > tamMP)
-                throw new PagBajoDemException($"El tamaño del proceso ({tamProc} bytes) no puede ser mayor al de la MP ({tamMP} bytes)", PROC_EXCEPTION);
+                throw new PagBajoDemException($"El tamaño del proceso ({tamProc} bytes) no puede ser mayor al de la MP ({tamMP} bytes)", PagBajoDemException.PROC_EXCEPTION);
             if (tamMarco > tamMP)
-                throw new PagBajoDemException($"El tamaño de cada marco ({tamMarco} bytes) no puede ser mayor al de la MP ({tamMP} bytes)", MARCO_EXCEPTION);
+                throw new PagBajoDemException($"El tamaño de cada marco ({tamMarco} bytes) no puede ser mayor al de la MP ({tamMP} bytes)", PagBajoDemException.MARCO_EXCEPTION);
             int sum = tamSO + tamProc;
             if (sum > tamMP)
-                throw new PagBajoDemException($"El tamaño SO y el del proceso ({sum} bytes) no pueden sumar más que el de la MP ({tamMP} bytes)", SO_AND_PROC_EXCEPTION);
+                throw new PagBajoDemException($"El tamaño SO y el del proceso ({sum} bytes) no pueden sumar más que el de la MP ({tamMP} bytes)", PagBajoDemException.SO_AND_PROC_EXCEPTION);
         }
         private void initMarcosSO()
         {
@@ -160,13 +160,23 @@ namespace PaginationSimulator.src
                 Console.WriteLine($"marco={p.marco}, valid={p.valid}, dirty={p.dirty}");
             Console.WriteLine("");
         }
-        class PagBajoDemException : Exception
+
+        public class PagBajoDemException : Exception
         {
             public PagBajoDemException(string message, byte type) : base(message)
             {
                 this.type = type;
             }
             public byte type;
+
+            // Tipos de error
+            public const byte MP_POW_OF_2_EXCEPTION = 0;
+            public const byte MARCO_POW_OF_2_EXCEPTION = 1;
+            public const byte MP_EXCEPTION = 2;
+            public const byte SO_EXCEPTION = 3;
+            public const byte PROC_EXCEPTION = 4;
+            public const byte MARCO_EXCEPTION = 5;
+            public const byte SO_AND_PROC_EXCEPTION = 6;
         }
     }
 
@@ -188,14 +198,6 @@ namespace PaginationSimulator.src
         private TablaPagRow[] tablaPag;
         private LinkedList<int> marcosLRU;
         private bool allMarcosLlenos;
-        // Tipos de error
-        public const byte MP_POW_OF_2_EXCEPTION = 0;
-        public const byte MARCO_POW_OF_2_EXCEPTION = 1;
-        public const byte MP_EXCEPTION = 2;
-        public const byte SO_EXCEPTION = 3;
-        public const byte PROC_EXCEPTION = 4;
-        public const byte MARCO_EXCEPTION = 5;
-        public const byte SO_AND_PROC_EXCEPTION = 6;
         // Estados de marco
         public const byte MARCO_FREE = 0;
         public const byte MARCO_CON_PAG = 1;

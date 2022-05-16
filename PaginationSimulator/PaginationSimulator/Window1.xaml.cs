@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PaginationSimulator.src;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,13 @@ namespace PaginationSimulator
     /// </summary>
     public partial class Window1 : Window
     {
-        public Window1()
+        public PagBajoDem sim;
+
+        public Window1(PagBajoDem sim)
         {
             InitializeComponent();
+            this.sim = sim;
+
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
