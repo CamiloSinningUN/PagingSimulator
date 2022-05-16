@@ -44,5 +44,10 @@ namespace PaginationSimulator
             pause.Visibility = Visibility.Hidden;
             Reset.Visibility = Visibility.Hidden;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

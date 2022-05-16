@@ -321,6 +321,7 @@
                 <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </ComboBox>
             <TextBox HorizontalAlignment="Left" Height="52" Margin="467,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center">
+                
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
