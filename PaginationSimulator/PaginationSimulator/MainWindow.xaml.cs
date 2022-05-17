@@ -107,7 +107,6 @@ namespace PaginationSimulator
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("asd");
             PagBajoDem sim = null;
             try
             {

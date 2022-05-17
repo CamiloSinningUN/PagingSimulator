@@ -1,6 +1,8 @@
 ﻿using PaginationSimulator.src;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +20,7 @@ namespace PaginationSimulator
     /// <summary>
     /// Lógica de interacción para Window1.xaml
     /// </summary>
+
     public partial class Window1 : Window
     {
         public PagBajoDem sim;
@@ -26,6 +29,14 @@ namespace PaginationSimulator
         {
             InitializeComponent();
             this.sim = sim;
+            this.Closing += new CancelEventHandler(Window1_Closing);
+            List<PagBajoDem> list = new List<PagBajoDem>();
+            list.Add(sim);
+            tamValues.ItemsSource = list;
+        }
+
+            private void start()
+        {
 
         }
 
@@ -52,6 +63,22 @@ namespace PaginationSimulator
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void back_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow win = new MainWindow();
+            win.Show();
+            this.Hide();
+        }
+        
+
+        void Window1_Closing(object sender, CancelEventArgs e)
+
+        {
+
+            Application.Current.Shutdown();
 
         }
     }

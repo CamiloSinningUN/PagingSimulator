@@ -315,7 +315,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <ComboBox x:Name="tamSOCB" Margin="805,316,456,369" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="97" Height="52" SelectedIndex="1" Style="{DynamicResource borderRadius}">
+            <ComboBox x:Name="tamSOCB" Margin="805,316,456,369" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="97" Height="52" SelectedIndex="0" Style="{DynamicResource borderRadius}">
                 <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -342,17 +342,17 @@
                     </Style>
                 </TextBox.Resources>
             </TextBox>
-            <ComboBox x:Name="tamMemCB" Margin="806,519,455,166" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="97" Height="52" SelectedIndex="1" Style="{DynamicResource borderRadius}">
+            <ComboBox x:Name="tamMemCB" Margin="806,519,455,166" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="97" Height="52" SelectedIndex="0" Style="{DynamicResource borderRadius}">
                 <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </ComboBox>
-            <ComboBox x:Name="tamProCB" Margin="805,416,456,269" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="97" Height="52" SelectedIndex="1" Style="{DynamicResource borderRadius}">
+            <ComboBox x:Name="tamProCB" Margin="805,416,456,269" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="97" Height="52" SelectedIndex="0" Style="{DynamicResource borderRadius}">
                 <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </ComboBox>
-            <ComboBox x:Name="tamPageCB" Margin="806,221,455,464" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="97" Height="52" SelectedIndex="1" Style="{DynamicResource borderRadius}">
+            <ComboBox x:Name="tamPageCB" Margin="806,221,455,464" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="30" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Center" HorizontalAlignment="Center" Width="97" Height="52" SelectedIndex="0" Style="{DynamicResource borderRadius}">
                 <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>

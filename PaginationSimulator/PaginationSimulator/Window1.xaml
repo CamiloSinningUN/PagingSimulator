@@ -473,7 +473,6 @@
                     <ComboBox x:Name="method" Margin="0" BorderBrush="Black" FontFamily="Fugaz one" FontSize="30" Background="#FF4361EE" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" SelectedIndex="1" Style="{DynamicResource borderRadius}" Grid.Column="1" Foreground="White">
                         <ComboBoxItem Content="LRU" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
                         <ComboBoxItem Content="FIFO" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
-                        <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
                     </ComboBox>
                     <Button x:Name="Reset"  Grid.Column="1"  Background="#FFFB3640" Margin="0" Foreground="{x:Null}" BorderBrush="{x:Null}" Visibility="Hidden" Click="reset_Click">
                         <Button.Resources>
@@ -486,6 +485,26 @@
                 </Grid>
             </StackPanel>
         </Border>
+        <Button x:Name="back" DockPanel.Dock="Top" Width="40" Height="40" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,5,0" Foreground="{x:Null}" BorderThickness="0" Click="back_Click">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Green"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+                </Style>
+            </Button.Style>
+            <Button.Background>
+                <ImageBrush ImageSource="assets/Back To.png" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
         <Border BorderBrush="Black" BorderThickness="1" Height="225" VerticalAlignment="Bottom" DockPanel.Dock="Bottom">
             <Grid VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
@@ -532,7 +551,7 @@
                         </TextBlock>
                     </Expander.Header>
                     <Border BorderThickness="1" CornerRadius="10,0,0,10">
-                        <DataGrid HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <DataGrid x:Name="tamValues" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <DataGrid.LayoutTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="-90"/>
@@ -550,10 +569,10 @@
                                 </Style>
                             </DataGrid.ColumnHeaderStyle>
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Ram"/>
-                                <DataGridTextColumn Header="proceso"/>
-                                <DataGridTextColumn Header="SO"/>
-                                <DataGridTextColumn Header="Marco"/>
+                                <DataGridTextColumn Header="Ram" Binding="{Binding tamMP}"/>
+                                <DataGridTextColumn Header="proceso" Binding="{Binding tamProc}"/>
+                                <DataGridTextColumn Header="SO" Binding="{Binding tamSO}"/>
+                                <DataGridTextColumn Header="Marco" Binding="{Binding tamMarco}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Border>
