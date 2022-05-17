@@ -6,7 +6,7 @@
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
         xmlns:local="clr-namespace:PaginationSimulator"
         mc:Ignorable="d"
-        Title="Window1" Height="768" Width="1366" WindowState="Maximized">
+        Title="Window1" Height="768" Width="1366" >
     <Window.Resources>
         <Image x:Key="Play" Source="assets/Play.png"  Width="40" Height="40"/>
         <Image x:Key="Pause" Source="assets/Pause.png"  Width="40" Height="40"/>

@@ -15,7 +15,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PaginationSimulator.src;
 
-
 namespace PaginationSimulator
 {
     /// <summary>
@@ -27,23 +26,25 @@ namespace PaginationSimulator
         public MainWindow()
         {
             InitializeComponent();
-            //int tammarco = 4;
-            //int tamproc = 29;
-            //int tamso = 16;
-            //int tammp = 64;
-            //string alg = "lru";
 
-            //pagbajodem simul = new pagbajodem(tammarco, tamproc, tamso, tammp, alg);
+            //int tammarco = 64;
+            //int tamproc = 64;
+            //int tamso = 64;
+            //int tammp = 128;
+            //byte alg = PagBajoDem.FIFO;
 
-            //bool[] marcosinit = genmarcosinit(simul.nummarcos);
-            //list<instruc> instruc = geninstruc(simul.tamproc, 10);
+            //PagBajoDem simul = new PagBajoDem(tammarco, tamproc, tamso, tammp);
 
-            //simul.start(marcosinit);
-            //simul.printmarcos();
-            //for (int i = 0; i < instruc.count; i++)
-            //    simul.exinstruc(instruc[i], i);
-            //simul.printmarcos();
-            //simul.printmarcoslru();
+            //simul.InitMarcos(genMarcosInit(simul.numMarcos));
+            //simul.SetAlg(alg);
+
+            //List<Instruc> instruc = genInstruc(simul.tamProc, 10);
+            //simul.printMarcos();
+            //for (int i = 0; i < instruc.Count; i++)
+            //    simul.ExInstruc(instruc[i], i);
+
+            //simul.printMarcos();
+            //simul.printMarcosUsage();
         }
 
         //static bool[] genMarcosInit(int numMarcos)
@@ -54,6 +55,7 @@ namespace PaginationSimulator
         //        marcos[i] = rnd.Next(10) >= 3;
         //    return marcos;
         //}
+
         //static List<Instruc> genInstruc(int tamProc, int numInst)
         //{
         //    List<Instruc> instruc = new List<Instruc>();
@@ -63,6 +65,23 @@ namespace PaginationSimulator
         //    return instruc;
         //}
 
+        private int convertUnit(ComboBox CB, int tam)
+        {
+            int conv = tam;
+            
+
+            switch (CB.SelectedItem.ToString().Split()[1])
+            {
+                case "KB":
+                    conv *= (int)Math.Pow(2, 10);
+                    break;
+                case "MB":
+                    conv *= (int)Math.Pow(2, 20);
+                    break;
+            }
+            Console.WriteLine(conv);
+            return conv;
+        }
 
         #region TextChanged
         private void Page_TextChanged(object sender, TextChangedEventArgs e)
@@ -88,16 +107,44 @@ namespace PaginationSimulator
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine("asd");
             PagBajoDem sim = null;
             try
             {
-                sim = new PagBajoDem(int.Parse(tamPage.Text), int.Parse(tamPro.Text), int.Parse(tamSO.Text), int.Parse(tamMem.Text), "lru");
-            }catch(Exception err)
+                int tamPageVal = 0;
+                int tamProVal = 0;
+                int tamSOVal = 0;
+                int tamMemVal = 0;
+
+                checked
+                {
+                    tamPageVal = convertUnit(tamPageCB, int.Parse(tamPage.Text));
+                    tamProVal = convertUnit(tamProCB, int.Parse(tamPro.Text));
+                    tamSOVal = convertUnit(tamSOCB, int.Parse(tamSO.Text));
+                    tamMemVal = convertUnit(tamMemCB, int.Parse(tamMem.Text));
+                }
+                sim = new PagBajoDem(tamPageVal, tamProVal, tamSOVal, tamMemVal);
+
+                Window1 subWindow = new Window1(sim);
+                subWindow.Show();
+                this.Hide();
+            }
+            catch (FormatException ex)
             {
-                
-                PagBajoDem.PagBajoDemException ex = (PagBajoDem.PagBajoDemException) err;
-                switch (ex.type) {
-                    case PagBajoDem.PagBajoDemException.MARCO_EXCEPTION: //hacer algo
+                Console.WriteLine(ex.Message);
+
+            }
+            catch (OverflowException ex)
+            {
+                Console.WriteLine(ex.Message);
+
+            }
+            catch (PagBajoDem.PagBajoDemException ex)
+            {
+                Console.WriteLine(ex.Message);
+                switch (ex.Type)
+                {
+                    case PagBajoDem.PagBajoDemException.MARCO_EXCEPTION: 
                         break;
                     case PagBajoDem.PagBajoDemException.MARCO_POW_OF_2_EXCEPTION: //hacer algo
                         break;
@@ -114,14 +161,7 @@ namespace PaginationSimulator
                     default: //hacer algo
                         break;
                 }
-                    
-                    
-                return;
             }
-
-            Window1 subWindow = new Window1(sim);
-            subWindow.Show();
-            this.Hide();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

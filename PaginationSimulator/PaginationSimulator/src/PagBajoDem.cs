@@ -8,7 +8,7 @@ namespace PaginationSimulator.src
 {
     public partial class PagBajoDem
     {
-        public PagBajoDem(int tamMarco, int tamProc, int tamSO, int tamMP, string alg)
+        public PagBajoDem(int tamMarco, int tamProc, int tamSO, int tamMP)
         {
             try
             {
@@ -20,39 +20,44 @@ namespace PaginationSimulator.src
                 throw e;
             }
 
-            this.alg = alg;
+            this.alg = LRU;
             this.tamMarco = tamMarco;
             this.tamProc = tamProc;
             this.tamSO = tamSO;
             this.tamMP = tamMP;
-            this.numMarcos = tamMP / tamMarco;
-            this.numMarcosSO = (tamSO + tamMarco - 1) / tamMarco;
             this.marcos = new byte[numMarcos];
             initMarcosSO();
             this.numPagProc = (tamProc + tamMarco - 1) / tamMarco;
             this.tablaPag = new TablaPagRow[numPagProc];
             initTablaPag();
             this.allMarcosLlenos = false;
-            this.marcosLRU = new LinkedList<int>();
+            this.marcosUsage = new LinkedList<int>();
             this.numFallosPag = 0;
             this.numReemp = 0;
         }
         private void CheckInput(int tamMarco, int tamProc, int tamSO, int tamMP)
         {
             // https://stackoverflow.com/questions/600293/how-to-check-if-a-number-is-a-power-of-2
-            if ((tamMarco & (tamMarco - 1)) != 0)
-                throw new PagBajoDemException($"El tamaño de cada marco ({tamMarco} bytes) debe ser potencia de 2", PagBajoDemException.MARCO_POW_OF_2_EXCEPTION);
             if ((tamMP & (tamMP - 1)) != 0)
-                throw new PagBajoDemException($"El tamaño de la MP ({tamSO} bytes) debe ser potencia de 2", PagBajoDemException.MP_POW_OF_2_EXCEPTION);
-            if (tamSO > tamMP)
-                throw new PagBajoDemException($"El tamaño del SO ({tamSO} bytes) no puede ser mayor al de la MP ({tamMP} bytes)", PagBajoDemException.SO_EXCEPTION);
-            if (tamProc > tamMP)
-                throw new PagBajoDemException($"El tamaño del proceso ({tamProc} bytes) no puede ser mayor al de la MP ({tamMP} bytes)", PagBajoDemException.PROC_EXCEPTION);
-            if (tamMarco > tamMP)
-                throw new PagBajoDemException($"El tamaño de cada marco ({tamMarco} bytes) no puede ser mayor al de la MP ({tamMP} bytes)", PagBajoDemException.MARCO_EXCEPTION);
-            int sum = tamSO + tamProc;
-            if (sum > tamMP)
-                throw new PagBajoDemException($"El tamaño SO y el del proceso ({sum} bytes) no pueden sumar más que el de la MP ({tamMP} bytes)", PagBajoDemException.SO_AND_PROC_EXCEPTION);
+                throw new PagBajoDemException($"Tamaño de la MP ({tamSO}) debe ser potencia de 2.", PagBajoDemException.MP_POW_OF_2_EXCEPTION);
+            if ((tamMarco & (tamMarco - 1)) != 0)
+                throw new PagBajoDemException($"Tamaño de marco ({tamMarco}) debe ser potencia de 2.", PagBajoDemException.MARCO_POW_OF_2_EXCEPTION);
+            if (tamMP <= 0)
+                throw new PagBajoDemException($"Tamaño de la MP ({tamMP}) debe ser mayor a 0.", PagBajoDemException.MP_EXCEPTION);
+            if (tamSO > tamMP || tamSO <= 0)
+                throw new PagBajoDemException($"Tamaño del SO ({tamSO}) debe estar en (0, {tamMP}].", PagBajoDemException.SO_EXCEPTION);
+            if (tamProc > tamMP || tamProc <= 0)
+                throw new PagBajoDemException($"Tamaño del proceso ({tamProc}) debe estar en (0, {tamMP}].", PagBajoDemException.PROC_EXCEPTION);
+            if (tamMarco > tamMP || tamMarco <= 0)
+                throw new PagBajoDemException($"Tamaño marco ({tamMarco}) debe estar en (0, {tamMP}].", PagBajoDemException.MARCO_EXCEPTION);
+
+            this.numMarcos = tamMP / tamMarco;
+            this.numMarcosProc = (tamProc + tamMarco - 1) / tamMarco;
+            this.numMarcosSO = (tamSO + tamMarco - 1) / tamMarco;
+
+            int sum = numMarcosSO + numMarcosProc;
+            if (sum > numMarcos)
+                throw new PagBajoDemException($"Marcos para SO y proceso ({numMarcosSO} + {numMarcosProc} = {sum}) superan marcos totales ({numMarcos})", PagBajoDemException.SO_AND_PROC_EXCEPTION);
         }
         private void initMarcosSO()
         {
@@ -64,14 +69,16 @@ namespace PaginationSimulator.src
             for (int i = 0; i < numPagProc; i++)
                 tablaPag[i] = new TablaPagRow(-1, false, false, 0);
         }
-        private void initRestoMarcos(bool[] marcosInit)
+        
+        public void InitMarcos(bool[] marcosInit)
         {
             for (int i = numMarcosSO; i < numMarcos; i++)
                 marcos[i] = marcosInit[i] ? MARCO_FREE : MARCO_OCCUP_PREV;
         }
-        public void Start(bool[] marcosInit)
+
+        public void SetAlg(byte alg)
         {
-            initRestoMarcos(marcosInit);
+            this.alg = alg;
         }
         public void ExInstruc(Instruc instruc, int time)
         {
@@ -84,11 +91,13 @@ namespace PaginationSimulator.src
                 marco = findMarcoLibre();
                 if (marco == -1)
                 {
-                    marco = getMarcoLRU();
+                    marco = marcosUsage.ElementAt(0);
                     TablaPagRow pagVictim = getPageFromMarco(marco);
                     swapOut = pagVictim.dirty;
                     numReemp++;
                     Console.WriteLine($"Marco tomado: {marco}, víctima: {pagVictim}");
+                    if (alg == FIFO)
+                        marcosUsage.RemoveFirst();
                 }
                 else
                 {
@@ -103,20 +112,26 @@ namespace PaginationSimulator.src
                 swapIn = true;
                 numFallosPag++;
                 marcos[marco] = MARCO_CON_PAG;
+
+                if(alg == FIFO)
+                    marcosUsage.AddLast(marco);
             }
             else
             {
                 swapIn = swapOut = false;
-                Console.WriteLine($"No fallo de pag (marco: {marco})");
+                Console.WriteLine($"No fallo de pag: marco={marco}");
             }
 
-            marcosLRU.Remove(marco);
-            marcosLRU.AddLast(marco);
+            if(alg == LRU)
+            {
+                marcosUsage.Remove(marco);
+                marcosUsage.AddLast(marco);
+            }
             int dirFis = marco * tamMarco + instruc.dir % tamProc;
             Console.WriteLine($"pag={pag}, marco={marco}, dirFis={dirFis}, swapIn={swapIn}, swapOut={swapOut}");
             Console.WriteLine("");
             printTablePag();
-            printMarcosLRU();
+            printMarcosUsage();
         }
         private int findMarcoLibre()
         {
@@ -127,10 +142,6 @@ namespace PaginationSimulator.src
                     marco = i;
             if (marco == -1) allMarcosLlenos = true;
             return marco;
-        }
-        private int getMarcoLRU()
-        {
-            return marcosLRU.ElementAt(0);
         }
 
         private TablaPagRow getPageFromMarco(int marco)
@@ -145,10 +156,10 @@ namespace PaginationSimulator.src
                 Console.WriteLine(i + " " + marcos[i]);
             Console.WriteLine("");
         }
-        public void printMarcosLRU()
+        public void printMarcosUsage()
         {
-            Console.WriteLine("MarcosLRU:");
-            foreach (int m in marcosLRU)
+            Console.WriteLine("Uso de los marcos:");
+            foreach (int m in marcosUsage)
                 Console.WriteLine(m);
             Console.WriteLine("");
         }
@@ -163,11 +174,11 @@ namespace PaginationSimulator.src
 
         public class PagBajoDemException : Exception
         {
-            public PagBajoDemException(string message, byte type) : base(message)
+            public PagBajoDemException(string Message, byte Type) : base(Message)
             {
-                this.type = type;
+                this.Type = Type;
             }
-            public byte type;
+            public byte Type;
 
             // Tipos de error
             public const byte MP_POW_OF_2_EXCEPTION = 0;
@@ -184,20 +195,26 @@ namespace PaginationSimulator.src
     {
         // public const int MAX_TAM_MARCO = 8192;
         // public const int MIN_TAM_MARCO = 0; //512
-        public string alg;
+        private byte alg;
         public int tamMarco;
         public int tamProc;
         public int tamSO;
         public int tamMP;
         public int numMarcos;
+        public int numMarcosProc;
         public int numMarcosSO;
         public int numPagProc;
         public int numFallosPag;
         public int numReemp;
         private byte[] marcos;
         private TablaPagRow[] tablaPag;
-        private LinkedList<int> marcosLRU;
+        private LinkedList<int> marcosUsage;
         private bool allMarcosLlenos;
+
+        // Algoritmos
+        public const byte FIFO = 0;
+        public const byte LRU = 1;
+
         // Estados de marco
         public const byte MARCO_FREE = 0;
         public const byte MARCO_CON_PAG = 1;
