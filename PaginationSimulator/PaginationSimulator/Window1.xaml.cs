@@ -32,36 +32,38 @@ namespace PaginationSimulator
         List<Instruc> instruc;
         ManualResetEvent mrse;
         ObservableCollection<Inst> instList = new ObservableCollection<Inst>();
+        ObservableCollection<Mem> memList = new ObservableCollection<Mem>();
+
 
         public Window1(PagBajoDem sim)
         {
             InitializeComponent();
-            
+
             this.sim = sim;
             this.Closing += new CancelEventHandler(Window1_Closing);
             List<tempSim> list = new List<tempSim>();
-            list.Add(new tempSim(sim.tamMarco+" Bytes", sim.tamSO + " Bytes", sim.tamProc + " Bytes", sim.tamMP + " Bytes"));
+            list.Add(new tempSim(sim.tamMarco + " Bytes", sim.tamSO + " Bytes", sim.tamProc + " Bytes", sim.tamMP + " Bytes"));
             tamValues.ItemsSource = list;
             mrse = new ManualResetEvent(false);
             InstDG.ItemsSource = instList;
+            for (int i = 0; i < sim.numMarcos; i++)
+            {
+                memList.Add(new Mem() { marco = i, page = -1 });
+            }
+            memDG.ItemsSource = memList;
             t = null;
-            
+
         }
 
         private void Run()
         {
-            for(int i = 0; i < instruc.Count; i++)
+            for (int i = 0; i < instruc.Count; i++)
             {
                 Console.WriteLine("asdasd");
                 mrse.WaitOne();
                 sim.ExInstruc(instruc[i], i);
                 Thread.Sleep(1000);
             }
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         private void play_Click(object sender, RoutedEventArgs e)
@@ -81,7 +83,7 @@ namespace PaginationSimulator
                 t = new Thread(new ThreadStart(Run));
                 t.Start();
             }
-            else 
+            else
             {
                 Console.WriteLine("b");
                 mrse.Set();
@@ -105,17 +107,12 @@ namespace PaginationSimulator
             pause.Visibility = Visibility.Hidden;
             mrse.Reset();
         }
-        
+
         private void resume_Click(object sender, RoutedEventArgs e)
         {
             pause.Visibility = Visibility.Visible;
             resume.Visibility = Visibility.Hidden;
             mrse.Reset();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void back_Click(object sender, RoutedEventArgs e)
@@ -124,19 +121,10 @@ namespace PaginationSimulator
             win.Show();
             this.Hide();
         }
-        
 
         void Window1_Closing(object sender, CancelEventArgs e)
-
         {
-
             Application.Current.Shutdown();
-
-        }
-
-        private void DG3_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         private bool[] genMarcosInit(int numMarcos)
@@ -157,24 +145,10 @@ namespace PaginationSimulator
             return instruc;
         }
 
-        private void DG1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void addInst_Click(object sender, RoutedEventArgs e)
         {   
             Inst tempInst = new Inst();
             instList.Add(tempInst); 
-        }
-        private void Tnst_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
 
         private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)

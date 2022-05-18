@@ -67,6 +67,7 @@
     <Compile Include="src\Salida.cs" />
     <Compile Include="src\TablaPagRow.cs" />
     <Compile Include="tables\Inst.cs" />
+    <Compile Include="tables\Mem.cs" />
     <Compile Include="tables\tempSim.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>

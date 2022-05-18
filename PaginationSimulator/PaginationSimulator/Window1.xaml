@@ -336,7 +336,7 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Label RenderTransformOrigin="0.987,2.404" Foreground="#FF3A0CA3" FontSize="30" FontFamily="Fugaz one" Margin="0,0,1,207" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Instrucciones"/>
+                <Label Foreground="#FF3A0CA3" FontSize="30" FontFamily="Fugaz one" Margin="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Instrucciones" VerticalAlignment="Top"/>
                 <Grid Margin="0,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -344,7 +344,7 @@
                                        "/>
                     </Grid.RowDefinitions>
                     <ScrollViewer Margin="0,50,0,0" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Row="0">
-                        <DataGrid x:Name="InstDG" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Center" Background="White" BorderBrush="White" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0" Padding="0" Foreground="Black" SelectionChanged="DG1_SelectionChanged" HorizontalScrollBarVisibility="Disabled" >
+                        <DataGrid x:Name="InstDG" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Center" Background="White" BorderBrush="White" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0" Padding="0" Foreground="Black" HorizontalScrollBarVisibility="Disabled" >
 
                             <DataGrid.Columns>
                                 <!--<DataGridTextColumn Header="Dir Lógica"  Binding="{Binding dir}" />-->
@@ -354,7 +354,7 @@
                                 <DataGridTemplateColumn Header="Dir Lógica">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding dir}" PreviewTextInput="OnPreviewTextInput"  TextChanged="Tnst_TextChanged" Name="dirLog"/>
+                                            <TextBox Text="{Binding dir}" PreviewTextInput="OnPreviewTextInput"  Name="dirLog"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -410,7 +410,7 @@
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
                         <Border BorderBrush="Black" BorderThickness="1" Height="60" Width="70" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0" Background="#FFF3F3F3">
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Height="60" BorderBrush="{x:Null}" Margin="0" Click="Button_Click" >
+                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Height="60" BorderBrush="{x:Null}" Margin="0" >
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
                                         <Setter Property="Background" Value="Green"/>
@@ -507,7 +507,7 @@
                             </Button.Resources>
                             <StaticResource ResourceKey="Play"/>
                         </Button>
-                        <ComboBox x:Name="method" Margin="0" BorderBrush="Black" FontFamily="Fugaz one" FontSize="30" Background="#FF4361EE" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" SelectedIndex="1" Style="{DynamicResource borderRadius}" Grid.Column="1" Foreground="White">
+                        <ComboBox x:Name="method" Margin="0" BorderBrush="Black" FontFamily="Fugaz one" FontSize="30" Background="#FF4361EE" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" SelectedIndex="1" Style="{DynamicResource borderRadius}" Grid.Column="1" Foreground="White">
                             <ComboBoxItem Content="LRU" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
                             <ComboBoxItem Content="FIFO" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
                         </ComboBox>
@@ -636,13 +636,15 @@
             </Grid.ColumnDefinitions>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                 <Label Content="Memoria principal" FontFamily="Fugaz one" FontSize="30" Margin="0,10,0,0"/>
-                <DataGrid x:Name="DG3" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Center" Background="#FFB9B9B9" BorderBrush="#FFE0E0E0" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="30,0" Padding="0" Foreground="Black" SelectionChanged="DG3_SelectionChanged" >
+                <ScrollViewer>
+                    <DataGrid x:Name="memDG" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Center" Background="#FFB9B9B9" BorderBrush="#FFE0E0E0" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="0" Foreground="Black" >
 
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Marco"  Binding="{Binding FirstName}" />
-                        <DataGridTextColumn Header="Pagina" Binding="{Binding LastName}" />
-                    </DataGrid.Columns>
-                </DataGrid>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Marco"  Binding="{Binding marco}" />
+                            <DataGridTextColumn Header="Página" Binding="{Binding page}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
             </StackPanel>
             <Grid Margin="10,0,0,-200" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Top">
                 <Grid.RowDefinitions>
