@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("incono.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("box%20important.png")]
 
 

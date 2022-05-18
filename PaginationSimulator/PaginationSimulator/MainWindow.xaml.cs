@@ -26,6 +26,17 @@ namespace PaginationSimulator
         public MainWindow()
         {
             InitializeComponent();
+            Error1.Visibility = Visibility.Hidden;
+            Pic1.Visibility = Visibility.Hidden;
+            Error2.Visibility = Visibility.Hidden;
+            Pic2.Visibility = Visibility.Hidden;
+            Error3.Visibility = Visibility.Hidden;
+            Pic3.Visibility = Visibility.Hidden;
+            Error4.Visibility = Visibility.Hidden;
+            Pic4.Visibility = Visibility.Hidden;
+
+
+
 
             //int tammarco = 64;
             //int tamproc = 64;
@@ -107,6 +118,15 @@ namespace PaginationSimulator
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
+            Pic1.Visibility = Visibility.Hidden;
+            Error1.Visibility = Visibility.Hidden;
+            Pic2.Visibility = Visibility.Hidden;
+            Error2.Visibility = Visibility.Hidden;
+            Pic3.Visibility = Visibility.Hidden;
+            Error3.Visibility = Visibility.Hidden;
+            Pic4.Visibility = Visibility.Hidden;
+            Error4.Visibility = Visibility.Hidden;
             PagBajoDem sim = null;
             try
             {
@@ -131,6 +151,8 @@ namespace PaginationSimulator
             catch (FormatException ex)
             {
                 Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                //Label L = (Label) ex.Source;
 
             }
             catch (OverflowException ex)
@@ -143,19 +165,40 @@ namespace PaginationSimulator
                 Console.WriteLine(ex.Message);
                 switch (ex.Type)
                 {
-                    case PagBajoDem.PagBajoDemException.MARCO_EXCEPTION: 
+                    case PagBajoDem.PagBajoDemException.MARCO_EXCEPTION:
+                        Error1.Content = ex.Message;
+                        Pic1.Visibility = Visibility.Visible;
+                        Error1.Visibility = Visibility.Visible;
                         break;
-                    case PagBajoDem.PagBajoDemException.MARCO_POW_OF_2_EXCEPTION: //hacer algo
+                    case PagBajoDem.PagBajoDemException.MARCO_POW_OF_2_EXCEPTION:
+                        Error1.Content = ex.Message;
+                        Pic1.Visibility = Visibility.Visible;
+                        Error1.Visibility = Visibility.Visible;
                         break;
-                    case PagBajoDem.PagBajoDemException.MP_EXCEPTION: //hacer algo
+                    case PagBajoDem.PagBajoDemException.MP_EXCEPTION:
+                        Error4.Content = ex.Message;
+                        Pic4.Visibility = Visibility.Visible;
+                        Error4.Visibility = Visibility.Visible;
                         break;
-                    case PagBajoDem.PagBajoDemException.MP_POW_OF_2_EXCEPTION: //hacer algo
+                    case PagBajoDem.PagBajoDemException.MP_POW_OF_2_EXCEPTION:
+                        Error4.Content = ex.Message;
+                        Pic4.Visibility = Visibility.Visible;
+                        Error4.Visibility = Visibility.Visible;
                         break;
                     case PagBajoDem.PagBajoDemException.PROC_EXCEPTION: //hacer algo
+                        Error3.Content = ex.Message;
+                        Pic3.Visibility = Visibility.Visible;
+                        Error3.Visibility = Visibility.Visible;
                         break;
                     case PagBajoDem.PagBajoDemException.SO_AND_PROC_EXCEPTION: //hacer algo
+                        Error4.Content = ex.Message;
+                        Pic4.Visibility = Visibility.Visible;
+                        Error4.Visibility = Visibility.Visible;
                         break;
                     case PagBajoDem.PagBajoDemException.SO_EXCEPTION: //hacer algo
+                        Error2.Content = ex.Message;
+                        Pic2.Visibility = Visibility.Visible;
+                        Error2.Visibility = Visibility.Visible;
                         break;
                     default: //hacer algo
                         break;
