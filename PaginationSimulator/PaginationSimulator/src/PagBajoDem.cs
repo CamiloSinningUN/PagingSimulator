@@ -50,6 +50,7 @@ namespace PaginationSimulator.src
                 throw new PagBajoDemException($"Tamaño del proceso ({tamProc}) debe estar en (0, {tamMP}].", PagBajoDemException.PROC_EXCEPTION);
             if (tamMarco > tamMP || tamMarco <= 0)
                 throw new PagBajoDemException($"Tamaño marco ({tamMarco}) debe estar en (0, {tamMP}].", PagBajoDemException.MARCO_EXCEPTION);
+            
 
             this.numMarcos = tamMP / tamMarco;
             this.numMarcosProc = (tamProc + tamMarco - 1) / tamMarco;
@@ -184,6 +185,8 @@ namespace PaginationSimulator.src
             public const byte PROC_EXCEPTION = 4;
             public const byte MARCO_EXCEPTION = 5;
             public const byte SO_AND_PROC_EXCEPTION = 6;
+          
+
         }
     }
 

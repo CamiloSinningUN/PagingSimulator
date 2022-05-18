@@ -143,5 +143,8 @@
   <ItemGroup>
     <Resource Include="assets\incono.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\Box Important.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
