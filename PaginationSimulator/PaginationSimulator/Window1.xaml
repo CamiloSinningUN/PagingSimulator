@@ -462,7 +462,7 @@
                         </Button.Resources>
                         <StaticResource ResourceKey="Play"/>
                     </Button>
-                    <Button x:Name="pause" Width="160" Height="64" Grid.Column="0"  Background="#FF28AFB0" Margin="0,0,10,0" Foreground="{x:Null}" BorderBrush="{x:Null}"  Visibility="Hidden">
+                    <Button x:Name="pause" Width="160" Height="64" Grid.Column="0"  Background="#FF28AFB0" Margin="0,0,10,0" Foreground="{x:Null}" BorderBrush="{x:Null}"  Visibility="Hidden" Click="pause_Click">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="10"/>
@@ -542,7 +542,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>
-                <Expander Grid.Column="1"  ExpandDirection="Left" IsExpanded="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Height="115" VerticalAlignment="Center" Margin="0,0,0,6">
+                <Expander Grid.Column="1"  ExpandDirection="Left" IsExpanded="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Height="115" VerticalAlignment="Center" Margin="0,0,0,6" HorizontalAlignment="Right">
                     <Expander.Header>
                         <TextBlock Text="Especificaciones">
                             <TextBlock.LayoutTransform>
@@ -551,12 +551,24 @@
                         </TextBlock>
                     </Expander.Header>
                     <Border BorderThickness="1" CornerRadius="10,0,0,10">
-                        <DataGrid x:Name="tamValues" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <DataGrid x:Name="tamValues" HorizontalAlignment="Left" VerticalAlignment="Center" ScrollViewer.CanContentScroll="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
                             <DataGrid.LayoutTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="-90"/>
                                 </TransformGroup>
                             </DataGrid.LayoutTransform>
+                            <DataGrid.CellStyle>
+                                <Style  TargetType="DataGridCell">
+                                    <Setter Property="LayoutTransform">
+                                        <Setter.Value>
+                                            <TransformGroup>
+                                                <RotateTransform Angle="90"/>
+                                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                                            </TransformGroup>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGrid.CellStyle>
                             <DataGrid.ColumnHeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="LayoutTransform">
@@ -586,10 +598,10 @@
             </Grid.ColumnDefinitions>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                 <Label Content="Memoria principal" FontFamily="Fugaz one" FontSize="30" Margin="0,10,0,0"/>
-                <DataGrid x:Name="DG3" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Center" Background="#FFB9B9B9" BorderBrush="#FFE0E0E0" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="30,0" Padding="0" Foreground="Black" >
+                <DataGrid x:Name="DG3" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Center" Background="#FFB9B9B9" BorderBrush="#FFE0E0E0" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="30,0" Padding="0" Foreground="Black" SelectionChanged="DG3_SelectionChanged" >
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Dir fis"  Binding="{Binding FirstName}" />
+                        <DataGridTextColumn Header="Marco"  Binding="{Binding FirstName}" />
                         <DataGridTextColumn Header="Pagina" Binding="{Binding LastName}" />
                     </DataGrid.Columns>
                 </DataGrid>
@@ -600,7 +612,7 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0">
-                    <Label Content="Memoria secuandaria" FontFamily="Fugaz one" FontSize="30" Margin="0,10,0,0"/>
+                    <Label Content="Memoria secundaria" FontFamily="Fugaz one" FontSize="30" Margin="0,10,0,0"/>
                     <DataGrid x:Name="DG4" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Center" Background="#FFB9B9B9" BorderBrush="#FFE0E0E0" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="30,0" Padding="0" Foreground="Black" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Paginas" Binding="{Binding LastName}" />

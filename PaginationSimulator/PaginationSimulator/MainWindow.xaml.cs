@@ -36,7 +36,7 @@ namespace PaginationSimulator
             //PagBajoDem simul = new PagBajoDem(tammarco, tamproc, tamso, tammp);
 
             //simul.InitMarcos(genMarcosInit(simul.numMarcos));
-            //simul.SetAlg(alg);
+            //simul.alg = alg;
 
             //List<Instruc> instruc = genInstruc(simul.tamProc, 10);
             //simul.printMarcos();
@@ -110,11 +110,8 @@ namespace PaginationSimulator
             PagBajoDem sim = null;
             try
             {
-                int tamPageVal = 0;
-                int tamProVal = 0;
-                int tamSOVal = 0;
-                int tamMemVal = 0;
-
+                int tamPageVal, tamProVal, tamSOVal, tamMemVal;
+                
                 checked
                 {
                     tamPageVal = convertUnit(tamPageCB, int.Parse(tamPage.Text));

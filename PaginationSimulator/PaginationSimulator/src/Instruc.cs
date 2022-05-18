@@ -13,8 +13,8 @@ namespace PaginationSimulator.src
             this.dir = dir;
             this.lec = lec;
         }
-        public int dir;
-        public bool lec;
+        public int dir { get; set; }
+        public bool lec { get; set; }
 
     }
 }
