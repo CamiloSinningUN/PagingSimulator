@@ -296,12 +296,12 @@
         <Grid RenderTransformOrigin="0.504,0.55" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Rectangle Fill="#00F4F4F5" Margin="403,104,-4,-10" Stroke="Black" RadiusX="10" RadiusY="10"/>
             <Label Content="Simulador" HorizontalAlignment="Left" Margin="626,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.274,0.574" FontFamily="Fugaz One " Height="73" Width="310" FontSize="60" Foreground="#99000000"/>
-            <Label Content="Paginación" Margin="414,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.274,0.574" FontFamily="Fugaz One " Height="152" FontSize="100" Foreground="#FF3A0CA3" HorizontalAlignment="Left" Width="549"/>
-            <Label Content="Tamaño marco/página" HorizontalAlignment="Left" Margin="467,171,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="24" Height="39" Width="263"/>
-            <Label Content="Tamaño sistema operativo" HorizontalAlignment="Left" Margin="467,280,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="24" Height="44" Width="289"/>
-            <Label Content="Tamaño proceso" HorizontalAlignment="Left" Margin="467,380,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="24" Height="35" Width="271"/>
-            <Label Content="Tamaño memoria principal" HorizontalAlignment="Left" Margin="453,480,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="24" Height="45" Width="409"/>
-            <TextBox x:Name="tamMem" TextChanged="Mem_TextChanged" HorizontalAlignment="Left" Height="41" Margin="467,515,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center">
+            <Label Content="Paginación" Margin="413,14,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.274,0.574" FontFamily="Fugaz One " Height="152" FontSize="100" Foreground="#FF3A0CA3" HorizontalAlignment="Left" Width="549"/>
+            <Label Content="Tamaño marco/página" HorizontalAlignment="Left" Margin="467,171,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30" Height="45" Width="358"/>
+            <Label Content="Tamaño sistema operativo" HorizontalAlignment="Left" Margin="467,272,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30" Height="44" Width="435"/>
+            <Label Content="Tamaño proceso" HorizontalAlignment="Left" Margin="467,372,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30" Height="44" Width="320"/>
+            <Label Content="Tamaño memoria principal" HorizontalAlignment="Left" Margin="467,474,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30" Height="45" Width="409"/>
+            <TextBox x:Name="tamMem" TextChanged="Mem_TextChanged" HorizontalAlignment="Left" Height="52" Margin="467,519,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center" Text="0">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -320,22 +320,22 @@
                 <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </ComboBox>
-            <TextBox x:Name="tamPage" TextChanged="Page_TextChanged" HorizontalAlignment="Left" Height="41" Margin="474,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center">
+            <TextBox x:Name="tamPage" TextChanged="Page_TextChanged" HorizontalAlignment="Left" Height="52" Margin="467,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center" Text="0">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
 
+            <TextBox x:Name="tamPro" TextChanged="Pro_TextChanged" HorizontalAlignment="Left" Height="52" Margin="467,416,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center" Text="0">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </TextBox.Resources>
             </TextBox>
-            <TextBox x:Name="tamPro" TextChanged="Pro_TextChanged" HorizontalAlignment="Left" Height="41" Margin="467,416,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center">
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
-            <TextBox x:Name="tamSO" TextChanged="SO_TextChanged" HorizontalAlignment="Left" Height="41" Margin="468,315,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center">
+            <TextBox x:Name="tamSO" TextChanged="SO_TextChanged" HorizontalAlignment="Left" Height="52" Margin="468,315,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center" Text="0">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>

@@ -4,15 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PaginationSimulator.src
+namespace PaginationSimulator.tables
 {
-    public class Instruc
+    public enum lecType { Lect, Ecri };
+    public class Inst
     {
-        public Instruc(int dir, bool lec)
-        {
-            this.dir = dir;
-            this.lec = lec;
-        }
         public int dir { get; set; }
         public bool lec { get; set; }
 

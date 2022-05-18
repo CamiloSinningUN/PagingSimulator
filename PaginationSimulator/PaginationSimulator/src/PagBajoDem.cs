@@ -38,15 +38,15 @@ namespace PaginationSimulator.src
         private void CheckInput(int tamMarco, int tamProc, int tamSO, int tamMP)
         {
             // https://stackoverflow.com/questions/600293/how-to-check-if-a-number-is-a-power-of-2
-            if ((tamMP & (tamMP - 1)) != 0)
-                throw new PagBajoDemException($"Tamaño de la MP ({tamSO}) debe ser potencia de 2.", PagBajoDemException.MP_POW_OF_2_EXCEPTION);
+            //if ((tamMP & (tamMP - 1)) != 0)
+            //    throw new PagBajoDemException($"Tamaño de la MP ({tamSO}) debe ser potencia de 2.", PagBajoDemException.MP_POW_OF_2_EXCEPTION);
             if ((tamMarco & (tamMarco - 1)) != 0)
                 throw new PagBajoDemException($"Tamaño de marco ({tamMarco}) debe ser potencia de 2.", PagBajoDemException.MARCO_POW_OF_2_EXCEPTION);
             if (tamMP <= 0)
                 throw new PagBajoDemException($"Tamaño de la MP ({tamMP}) debe ser mayor a 0.", PagBajoDemException.MP_EXCEPTION);
-            if (tamSO > tamMP || tamSO <= 0)
-                throw new PagBajoDemException($"Tamaño del SO ({tamSO}) debe estar en (0, {tamMP}].", PagBajoDemException.SO_EXCEPTION);
-            if (tamProc > tamMP || tamProc <= 0)
+            if (tamSO > tamMP || tamSO < 0)
+                throw new PagBajoDemException($"Tamaño del SO ({tamSO}) debe estar en [0, {tamMP}].", PagBajoDemException.SO_EXCEPTION);
+            if (tamProc > tamMP || tamProc < 0)
                 throw new PagBajoDemException($"Tamaño del proceso ({tamProc}) debe estar en (0, {tamMP}].", PagBajoDemException.PROC_EXCEPTION);
             if (tamMarco > tamMP || tamMarco <= 0)
                 throw new PagBajoDemException($"Tamaño marco ({tamMarco}) debe estar en (0, {tamMP}].", PagBajoDemException.MARCO_EXCEPTION);
@@ -77,10 +77,6 @@ namespace PaginationSimulator.src
                 marcos[i] = marcosInit[i] ? MARCO_FREE : MARCO_OCCUP_PREV;
         }
 
-        public void SetAlg(byte alg)
-        {
-            this.alg = alg;
-        }
         public void ExInstruc(Instruc instruc, int time)
         {
             Console.WriteLine($"instruc: (dir={instruc.dir}, lec={instruc.lec})");
@@ -198,11 +194,11 @@ namespace PaginationSimulator.src
     {
         // public const int MAX_TAM_MARCO = 8192;
         // public const int MIN_TAM_MARCO = 0; //512
-        private byte alg;
-        public int tamMarco;
-        public int tamProc;
-        public int tamSO;
-        public int tamMP;
+        public byte alg { get; set; }
+        public int tamMarco { get; set; }
+        public int tamProc { get; set; }
+        public int tamSO { get; set; }
+        public int tamMP { get; set; }
         public int numMarcos;
         public int numMarcosProc;
         public int numMarcosSO;
