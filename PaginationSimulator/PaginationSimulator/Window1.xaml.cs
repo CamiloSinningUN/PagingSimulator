@@ -15,6 +15,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Threading;
+using PaginationSimulator.tables;
+using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace PaginationSimulator
 {
@@ -28,6 +31,7 @@ namespace PaginationSimulator
         Thread t;
         List<Instruc> instruc;
         ManualResetEvent mrse;
+        ObservableCollection<Inst> instList = new ObservableCollection<Inst>();
 
         public Window1(PagBajoDem sim)
         {
@@ -35,11 +39,11 @@ namespace PaginationSimulator
             
             this.sim = sim;
             this.Closing += new CancelEventHandler(Window1_Closing);
-            List<PagBajoDem> list = new List<PagBajoDem>();
-            list.Add(sim);
+            List<tempSim> list = new List<tempSim>();
+            list.Add(new tempSim(sim.tamMarco+" Bytes", sim.tamSO + " Bytes", sim.tamProc + " Bytes", sim.tamMP + " Bytes"));
             tamValues.ItemsSource = list;
-
             mrse = new ManualResetEvent(false);
+            InstDG.ItemsSource = instList;
             t = null;
             
         }
@@ -90,14 +94,22 @@ namespace PaginationSimulator
             method.Visibility = Visibility.Visible;
             pause.Visibility = Visibility.Hidden;
             Reset.Visibility = Visibility.Hidden;
+            resume.Visibility = Visibility.Hidden;
 
             t = null;
         }
 
         private void pause_Click(object sender, RoutedEventArgs e)
         {
-            play.Visibility = Visibility.Visible;
+            resume.Visibility = Visibility.Visible;
             pause.Visibility = Visibility.Hidden;
+            mrse.Reset();
+        }
+        
+        private void resume_Click(object sender, RoutedEventArgs e)
+        {
+            pause.Visibility = Visibility.Visible;
+            resume.Visibility = Visibility.Hidden;
             mrse.Reset();
         }
 
@@ -143,6 +155,31 @@ namespace PaginationSimulator
             for (int i = 0; i < numInst; i++)
                 instruc.Add(new Instruc(rnd.Next(0, tamProc), rnd.Next(10) < 5));
             return instruc;
+        }
+
+        private void DG1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void addInst_Click(object sender, RoutedEventArgs e)
+        {   
+            Inst tempInst = new Inst();
+            instList.Add(tempInst); 
+        }
+        private void Tnst_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
         }
     }
 }

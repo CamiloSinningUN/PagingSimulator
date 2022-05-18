@@ -26,7 +26,6 @@ namespace PaginationSimulator
         public MainWindow()
         {
             InitializeComponent();
-
             //int tammarco = 64;
             //int tamproc = 64;
             //int tamso = 64;
