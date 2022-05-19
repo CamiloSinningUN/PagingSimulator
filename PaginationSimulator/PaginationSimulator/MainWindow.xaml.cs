@@ -28,14 +28,7 @@ namespace PaginationSimulator
         {
             InitializeComponent();
             this.Closing += new CancelEventHandler(MainWindow_Closing);
-            Error1.Visibility = Visibility.Hidden;
-            Pic1.Visibility = Visibility.Hidden;
-            Error2.Visibility = Visibility.Hidden;
-            Pic2.Visibility = Visibility.Hidden;
-            Error3.Visibility = Visibility.Hidden;
-            Pic3.Visibility = Visibility.Hidden;
-            Error4.Visibility = Visibility.Hidden;
-            Pic4.Visibility = Visibility.Hidden;
+
 
 
 
@@ -125,15 +118,9 @@ namespace PaginationSimulator
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            HideErrors();
             
-            Pic1.Visibility = Visibility.Hidden;
-            Error1.Visibility = Visibility.Hidden;
-            Pic2.Visibility = Visibility.Hidden;
-            Error2.Visibility = Visibility.Hidden;
-            Pic3.Visibility = Visibility.Hidden;
-            Error3.Visibility = Visibility.Hidden;
-            Pic4.Visibility = Visibility.Hidden;
-            Error4.Visibility = Visibility.Hidden;
+
             PagBajoDem sim = null;
             try
             {
@@ -219,5 +206,19 @@ namespace PaginationSimulator
         {
 
         }
+
+        private void HideErrors()
+        {
+            Pic1.Visibility = Visibility.Hidden;
+            Error1.Visibility = Visibility.Hidden;
+            Pic2.Visibility = Visibility.Hidden;
+            Error2.Visibility = Visibility.Hidden;
+            Pic3.Visibility = Visibility.Hidden;
+            Error3.Visibility = Visibility.Hidden;
+            Pic4.Visibility = Visibility.Hidden;
+            Error4.Visibility = Visibility.Hidden;
+        }
+        
+       
     }
 }

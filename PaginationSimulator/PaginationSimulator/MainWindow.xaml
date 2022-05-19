@@ -296,31 +296,31 @@
         <Grid RenderTransformOrigin="0.504,0.55" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Rectangle Fill="#00F4F4F5" Margin="403,104,-4,-10" Stroke="Black" RadiusX="10" RadiusY="10"/>
             <Label Content="Simulador" HorizontalAlignment="Left" Margin="626,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.274,0.574" FontFamily="Fugaz One " Height="73" Width="310" FontSize="60" Foreground="#99000000"/>
-            <Label Content="Paginación" Margin="413,14,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.274,0.574" FontFamily="Fugaz One " Height="152" FontSize="100" Foreground="#FF3A0CA3" HorizontalAlignment="Left" Width="549"/>
-            <Label Content="Tamaño marco/página" HorizontalAlignment="Left" Margin="467,171,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30" Height="45" Width="358"/>
-            <Label Content="Tamaño sistema operativo" HorizontalAlignment="Left" Margin="467,272,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30" Height="44" Width="435"/>
-            <Label Content="Tamaño proceso" HorizontalAlignment="Left" Margin="467,372,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30" Height="44" Width="320"/>
-            <Label Content="Tamaño memoria principal" HorizontalAlignment="Left" Margin="467,474,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="30" Height="45" Width="409"/>
-            <TextBox x:Name="tamMem" TextChanged="Mem_TextChanged" HorizontalAlignment="Left" Height="52" Margin="467,519,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center" Text="0">
+            <Label Content="Paginación" Margin="427,9,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.274,0.574" FontFamily="Fugaz One " Height="152" FontSize="100" Foreground="#FF3A0CA3" HorizontalAlignment="Left" Width="549"/>
+            <Label Content="Tamaño marco/página" HorizontalAlignment="Left" Margin="474,171,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="24" Height="45" Width="358"/>
+            <Label Content="Tamaño sistema operativo" HorizontalAlignment="Left" Margin="474,272,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="24" Height="44" Width="435"/>
+            <Label Content="Tamaño proceso" HorizontalAlignment="Left" Margin="474,369,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="24" Height="44" Width="320"/>
+            <Label Content="Tamaño memoria principal" HorizontalAlignment="Left" Margin="474,469,0,0" VerticalAlignment="Top" FontFamily="Fugaz one" FontSize="24" Height="45" Width="409"/>
+            <TextBox x:Name="tamMem" TextChanged="Mem_TextChanged" HorizontalAlignment="Left" Height="41" Margin="479,504,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center" Text="0">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </TextBox.Resources>
             </TextBox>
-            <Button Content="INICIAR" Margin="461,599,77,5" VerticalAlignment="Top" Height="43" FontFamily="Fugaz one" Background="#FF4361EE" Foreground="White" FontSize="30" Click="Button_Click">
+            <Button Content="INICIAR" Margin="472,585,66,0" VerticalAlignment="Top" Height="43" FontFamily="Fugaz one" Background="#FF4361EE" Foreground="White" FontSize="30" Click="Button_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <ComboBox x:Name="tamSOCB" Margin="795,315,0,0" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="25" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" Height="38" SelectedIndex="0" Style="{DynamicResource borderRadius}">
+            <ComboBox x:Name="tamSOCB" Margin="795,306,0,0" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="25" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" Height="41" SelectedIndex="0" Style="{DynamicResource borderRadius}">
                 <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </ComboBox>
-            <TextBox x:Name="tamPage" TextChanged="Page_TextChanged" HorizontalAlignment="Left" Height="52" Margin="467,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center" Text="0">
+            <TextBox x:Name="tamPage" TextChanged="Page_TextChanged" HorizontalAlignment="Left" Height="41" Margin="479,206,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center" Text="0">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -328,59 +328,59 @@
                 </TextBox.Resources>
             </TextBox>
 
-            <TextBox x:Name="tamPro" TextChanged="Pro_TextChanged" HorizontalAlignment="Left" Height="52" Margin="467,416,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center" Text="0">
+            <TextBox x:Name="tamPro" TextChanged="Pro_TextChanged" HorizontalAlignment="Left" Height="41" Margin="479,401,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center" Text="0">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </TextBox.Resources>
             </TextBox>
-            <TextBox x:Name="tamSO" TextChanged="SO_TextChanged" HorizontalAlignment="Left" Height="52" Margin="468,315,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center" Text="0">
+            <TextBox x:Name="tamSO" TextChanged="SO_TextChanged" HorizontalAlignment="Left" Height="41" Margin="479,306,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" FontFamily="Fugaz one" FontSize="30" Foreground="#D8000000" BorderBrush="Black" Background="#FFF3F3F3" UseLayoutRounding="False" VerticalContentAlignment="Center" Text="0">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </TextBox.Resources>
             </TextBox>
-            <ComboBox x:Name="tamMemCB" Margin="794,516,0,0" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="25" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" Height="38" SelectedIndex="0" Style="{DynamicResource borderRadius}">
+            <ComboBox x:Name="tamMemCB" Margin="795,504,0,0" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="25" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" Height="41" SelectedIndex="0" Style="{DynamicResource borderRadius}">
                 <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </ComboBox>
-            <ComboBox x:Name="tamProCB" Margin="796,415,0,0" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="25" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" Height="38" SelectedIndex="0" Style="{DynamicResource borderRadius}">
+            <ComboBox x:Name="tamProCB" Margin="795,401,0,0" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="25" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" Height="41" SelectedIndex="0" Style="{DynamicResource borderRadius}">
                 <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </ComboBox>
-            <ComboBox x:Name="tamPageCB" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="25" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" Height="39" SelectedIndex="0" Style="{DynamicResource borderRadius}" Margin="799,216,0,0">
+            <ComboBox x:Name="tamPageCB" BorderBrush="Black" Foreground="#D8000000" BorderThickness="1" FontFamily="Fugaz one" FontSize="25" Background="Black" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99" Height="41" SelectedIndex="0" Style="{DynamicResource borderRadius}" Margin="795,207,0,0">
                 <ComboBoxItem Content="Bytes" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="KB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBoxItem Content="MB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </ComboBox>
-            <Label x:Name="Error1" HorizontalAlignment="Left" Height="40" Margin="490,258,0,0" VerticalAlignment="Top" Width="381" Content="Error" Background="{x:Null}" Foreground="#FFFC6A5C" FontWeight="Bold" Visibility="Visible"/>
-            <Label x:Name="Pic1" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="42" Margin="458,258,0,0" Visibility="Visible">
+            <Label x:Name="Error1" HorizontalAlignment="Left" Height="24" Margin="499,248,0,0" VerticalAlignment="Top" Width="381" Content="Error" Background="{x:Null}" Foreground="#FFFC6A5C" FontWeight="Bold" Visibility="Hidden"/>
+            <Label x:Name="Pic1" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="42" Margin="468,246,0,0" Visibility="Hidden">
                 <Label.Background>
                     <ImageBrush ImageSource="/assets/Box Important.png"/>
                 </Label.Background>
             </Label>
-            <Label x:Name="Pic2" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="42" Margin="457,357,0,0" Visibility="Visible">
+            <Label x:Name="Pic2" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="42" Margin="466,346,0,0" Visibility="Hidden">
                 <Label.Background>
                     <ImageBrush ImageSource="/assets/Box Important.png"/>
                 </Label.Background>
             </Label>
-            <Label x:Name="Pic3" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="42" Margin="456,458,0,0" Visibility="Visible">
+            <Label x:Name="Pic3" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="42" Margin="465,443,0,0" Visibility="Hidden">
                 <Label.Background>
                     <ImageBrush ImageSource="/assets/Box Important.png"/>
                 </Label.Background>
             </Label>
-            <Label x:Name="Pic4" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="42" Margin="458,568,0,0" Visibility="Visible">
+            <Label x:Name="Pic4" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="42" Margin="467,545,0,0" Visibility="Hidden">
                 <Label.Background>
                     <ImageBrush ImageSource="/assets/Box Important.png"/>
                 </Label.Background>
             </Label>
-            <Label x:Name="Error2" HorizontalAlignment="Left" Height="40" Margin="489,358,0,0" VerticalAlignment="Top" Width="381" Content="Error" Background="{x:Null}" Foreground="#FFFC6A5C" FontWeight="Bold" Visibility="Visible"/>
-            <Label x:Name="Error3" HorizontalAlignment="Left" Height="40" Margin="488,460,0,0" VerticalAlignment="Top" Width="381" Content="Error" Background="{x:Null}" Foreground="#FFFC6A5C" FontWeight="Bold" Visibility="Visible"/>
-            <Label x:Name="Error4" HorizontalAlignment="Left" Height="40" Margin="488,568,0,0" VerticalAlignment="Top" Width="381" Content="Error" Background="{x:Null}" Foreground="#FFFC6A5C" FontWeight="Bold" Visibility="Visible"/>
+            <Label x:Name="Error2" HorizontalAlignment="Left" Height="28" Margin="496,348,0,0" VerticalAlignment="Top" Width="381" Content="Error" Background="{x:Null}" Foreground="#FFFC6A5C" FontWeight="Bold" Visibility="Hidden"/>
+            <Label x:Name="Error3" HorizontalAlignment="Left" Height="25" Margin="496,443,0,0" VerticalAlignment="Top" Width="381" Content="Error" Background="{x:Null}" Foreground="#FFFC6A5C" FontWeight="Bold" Visibility="Hidden"/>
+            <Label x:Name="Error4" HorizontalAlignment="Left" Height="23" Margin="498,546,0,0" VerticalAlignment="Top" Width="381" Content="Error" Background="{x:Null}" Foreground="#FFFC6A5C" FontWeight="Bold" Visibility="Hidden"/>
 
         </Grid>
     </DockPanel>
