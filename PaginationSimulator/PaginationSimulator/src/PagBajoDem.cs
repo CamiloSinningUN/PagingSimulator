@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace PaginationSimulator.src
             this.marcos = new byte[numMarcos];
             initMarcosSO();
             this.numPagProc = (tamProc + tamMarco - 1) / tamMarco;
-            this.tablaPag = new TablaPagRow[numPagProc];
+            this.tablaPag = new ObservableCollection<TablaPagRow>(new List<TablaPagRow>(numPagProc));
             initTablaPag();
             this.allMarcosLlenos = false;
             this.marcosUsage = new LinkedList<int>();
@@ -68,7 +69,7 @@ namespace PaginationSimulator.src
         private void initTablaPag()
         {
             for (int i = 0; i < numPagProc; i++)
-                tablaPag[i] = new TablaPagRow(-1, false, false, 0);
+                tablaPag.Add( new TablaPagRow(-1, false, false, 0, i));
         }
         
         public void InitMarcos(bool[] marcosInit)
@@ -82,6 +83,7 @@ namespace PaginationSimulator.src
             Console.WriteLine($"instruc: (dir={instruc.dir}, lec={instruc.lec})");
             int pag = instruc.dir / tamMarco;
             int marco = tablaPag[pag].marco;
+            Console.WriteLine(marco);
             bool swapIn, swapOut;
             if (marco == -1)
             {
@@ -143,7 +145,7 @@ namespace PaginationSimulator.src
 
         private TablaPagRow getPageFromMarco(int marco)
         {
-            for (int i = 0; i < tablaPag.Length; i++) if (tablaPag[i].marco == marco) return tablaPag[i];
+            for (int i = 0; i < tablaPag.Count; i++) if (tablaPag[i].marco == marco) return tablaPag[i];
             return null;
         }
         public void printMarcos()
@@ -167,6 +169,14 @@ namespace PaginationSimulator.src
             foreach (TablaPagRow p in tablaPag)
                 Console.WriteLine($"marco={p.marco}, valid={p.valid}, dirty={p.dirty}");
             Console.WriteLine("");
+        }
+
+        public ObservableCollection<TablaPagRow> getTablePag()
+        {
+            ObservableCollection<TablaPagRow> temp = new ObservableCollection<TablaPagRow>();
+            foreach (TablaPagRow p in tablaPag)
+                temp.Add(p);
+            return temp;
         }
 
         public class PagBajoDemException : Exception
@@ -206,7 +216,7 @@ namespace PaginationSimulator.src
         public int numFallosPag;
         public int numReemp;
         private byte[] marcos;
-        private TablaPagRow[] tablaPag;
+        public ObservableCollection<TablaPagRow> tablaPag;
         private LinkedList<int> marcosUsage;
         private bool allMarcosLlenos;
 

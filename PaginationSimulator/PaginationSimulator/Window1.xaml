@@ -10,12 +10,6 @@
         mc:Ignorable="d"
         Title="Window1" Height="768" Width="1366" >
     <Window.Resources>
-        <ObjectDataProvider x:Key="lecType" MethodName="GetValue"
-                            ObjectType="{x:Type sys:Enum}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="space:lecType"/>
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
         <Image x:Key="Play" Source="assets/Play.png"  Width="40" Height="40"/>
         <Image x:Key="Pause" Source="assets/Pause.png"  Width="40" Height="40"/>
         <Image x:Key="Reset" Source="assets/Reset.png"  Width="40" Height="40"/>
@@ -354,11 +348,17 @@
                                 <DataGridTemplateColumn Header="Dir Lógica">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding dir}" PreviewTextInput="OnPreviewTextInput"  Name="dirLog"/>
+                                            <TextBox Text="{Binding dir}" PreviewTextInput="OnPreviewTextInput" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridComboBoxColumn x:Name="lectecri" Header="Lect/Escri"  ItemsSource="{Binding Source={StaticResource lecType}}" />
+                                <DataGridTemplateColumn Header="Lect/Ecri">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Text="{Binding lec}" PreviewTextInput="OnPreviewTextInput" PreviewMouseDown="lect_PreviewMouseDown" IsReadOnly="True"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </ScrollViewer>
@@ -629,48 +629,61 @@
                 </Expander>
             </Grid>
         </Border>
-        <Grid VerticalAlignment="Top">
+        <Grid VerticalAlignment="Top" Margin="0,0,0,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                <Label Content="Memoria principal" FontFamily="Fugaz one" FontSize="30" Margin="0,10,0,0"/>
-                <ScrollViewer>
+            <Label Content="Memoria principal" FontFamily="Fugaz one" FontSize="30" Margin="0" HorizontalAlignment="Center"/>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0">
+                <ScrollViewer Margin="0">
                     <DataGrid x:Name="memDG" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Center" Background="#FFB9B9B9" BorderBrush="#FFE0E0E0" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="0" Foreground="Black" >
-
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Marco"  Binding="{Binding marco}" />
-                            <DataGridTextColumn Header="Página" Binding="{Binding page}" />
+                            <DataGridTemplateColumn Header="Marco">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding marco}" IsReadOnly="True"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Estado">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding okupa}" IsReadOnly="True" PreviewMouseDown="mem_PreviewMouseDown"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <!--<DataGridTextColumn Header="Marco"  Binding="{Binding marco}" />
+                            <DataGridTextColumn Header="Página" Binding="{Binding page}" />-->
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>
-            </StackPanel>
-            <Grid Margin="10,0,0,-200" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Top">
+            </Grid>
+            <Grid Margin="0,0,0,0" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0">
-                    <Label Content="Memoria secundaria" FontFamily="Fugaz one" FontSize="30" Margin="0,10,0,0"/>
-                    <DataGrid x:Name="DG4" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Center" Background="#FFB9B9B9" BorderBrush="#FFE0E0E0" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="30,0" Padding="0" Foreground="Black" >
+                <Label Content="Memoria secundaria" FontFamily="Fugaz one" FontSize="30" Margin="0" HorizontalAlignment="Center"/>
+                <ScrollViewer HorizontalAlignment="Center" Margin="0,50,0,0">
+                    <DataGrid x:Name="secDG" ItemsSource="{Binding}" AutoGenerateColumns="False" Background="#FFB9B9B9" BorderBrush="#FFE0E0E0" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="0" Foreground="Black" HorizontalAlignment="Center" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Paginas" Binding="{Binding LastName}" />
+                            <DataGridTextColumn Header="Paginas" Binding="{Binding num}" IsReadOnly="True" />
                         </DataGrid.Columns>
                     </DataGrid>
-                </StackPanel>
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0" Grid.Row="1">
-                    <Label Content="Tabla de páginas" FontFamily="Fugaz one" FontSize="30" Margin="0,10,0,0" HorizontalContentAlignment="Center"/>
-                    <DataGrid x:Name="DG5" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Center" Background="#FFB9B9B9" BorderBrush="#FFE0E0E0" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="30,0" Padding="0" Foreground="Black" >
+                </ScrollViewer>
+                <Label Content="Tabla de páginas" FontFamily="Fugaz one" FontSize="30" Margin="0" HorizontalContentAlignment="Center" Grid.Row="1"/>
+                <ScrollViewer Grid.RowSpan="2" Grid.Row="1" Margin="0,50,0,0">
+                    <DataGrid x:Name="pageTableDG" ItemsSource="{Binding}" AutoGenerateColumns="False" Background="#FFB9B9B9" BorderBrush="#FFE0E0E0" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="0" Foreground="Black" HorizontalAlignment="Center" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Indice" Binding="{Binding LastName}" />
-                            <DataGridTextColumn Header="Marco" Binding="{Binding LastName}" />
-                            <DataGridTextColumn Header="Bit val/inval" Binding="{Binding LastName}" />
-                            <DataGridTextColumn Header="Bit mod" Binding="{Binding LastName}" />
-                            <DataGridTextColumn Header="Tiempo" Binding="{Binding LastName}" />
+                            <DataGridTextColumn Header="Indice" Binding="{Binding index}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Marco" Binding="{Binding marco}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Bit val/inval" Binding="{Binding valid}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Bit mod" Binding="{Binding dirty}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tiempo" Binding="{Binding time}" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                </StackPanel>
+                </ScrollViewer>
             </Grid>
 
         </Grid>

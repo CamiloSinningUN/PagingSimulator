@@ -8,18 +8,20 @@ namespace PaginationSimulator.src
 {
     public class TablaPagRow
     {
-        public TablaPagRow(int marco, bool valid, bool dirty, int time)
+        public TablaPagRow(int marco, bool valid, bool dirty, int time, int index)
         {
             this.marco = marco;
             this.valid = valid;
             this.dirty = dirty;
             this.time = time;
+            this.index = index;
         }
 
-        public int marco;
-        public bool valid;
-        public bool dirty;
-        public int time;
+        public int marco { get; set; }
+        public bool valid { get; set; }
+        public bool dirty { get; set; }
+        public int time { get; set; }
+        public int index { get; set; }
 
     }
 }

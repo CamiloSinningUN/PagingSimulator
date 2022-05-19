@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -26,6 +27,7 @@ namespace PaginationSimulator
         public MainWindow()
         {
             InitializeComponent();
+            this.Closing += new CancelEventHandler(MainWindow_Closing);
             Error1.Visibility = Visibility.Hidden;
             Pic1.Visibility = Visibility.Hidden;
             Error2.Visibility = Visibility.Hidden;
@@ -38,24 +40,24 @@ namespace PaginationSimulator
 
 
 
-            //int tammarco = 64;
-            //int tamproc = 64;
-            //int tamso = 64;
-            //int tammp = 128;
-            //byte alg = PagBajoDem.FIFO;
+        //    int tammarco = 64;
+        //    int tamproc = 64;
+        //    int tamso = 64;
+        //    int tammp = 128;
+        //    byte alg = PagBajoDem.FIFO;
 
-            //PagBajoDem simul = new PagBajoDem(tammarco, tamproc, tamso, tammp);
+        //    PagBajoDem simul = new PagBajoDem(tammarco, tamproc, tamso, tammp);
+        //    Console.WriteLine(simul.tablaPag.Count);
+        //    simul.InitMarcos(genMarcosInit(simul.numMarcos));
+        //    simul.alg = alg;
 
-            //simul.InitMarcos(genMarcosInit(simul.numMarcos));
-            //simul.alg = alg;
+        //    List<Instruc> instruc = genInstruc(simul.tamProc, 10);
+        //    simul.printMarcos();
+        //    for (int i = 0; i < instruc.Count; i++)
+        //        simul.ExInstruc(instruc[i], i);
 
-            //List<Instruc> instruc = genInstruc(simul.tamProc, 10);
-            //simul.printMarcos();
-            //for (int i = 0; i < instruc.Count; i++)
-            //    simul.ExInstruc(instruc[i], i);
-
-            //simul.printMarcos();
-            //simul.printMarcosUsage();
+        //    simul.printMarcos();
+        //    simul.printMarcosUsage();
         }
 
         //static bool[] genMarcosInit(int numMarcos)
@@ -75,6 +77,11 @@ namespace PaginationSimulator
         //        instruc.Add(new Instruc(rnd.Next(0, tamProc), rnd.Next(10) < 5));
         //    return instruc;
         //}
+
+        void MainWindow_Closing(object sender, CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
 
         private int convertUnit(ComboBox CB, int tam)
         {

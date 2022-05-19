@@ -31,9 +31,8 @@ namespace PaginationSimulator
         Thread t;
         List<Instruc> instruc;
         ManualResetEvent mrse;
-        ObservableCollection<Inst> instList = new ObservableCollection<Inst>();
+        ObservableCollection<ParseInst> instList = new ObservableCollection<ParseInst>();
         ObservableCollection<Mem> memList = new ObservableCollection<Mem>();
-
 
         public Window1(PagBajoDem sim)
         {
@@ -44,13 +43,37 @@ namespace PaginationSimulator
             List<tempSim> list = new List<tempSim>();
             list.Add(new tempSim(sim.tamMarco + " Bytes", sim.tamSO + " Bytes", sim.tamProc + " Bytes", sim.tamMP + " Bytes"));
             tamValues.ItemsSource = list;
+
             mrse = new ManualResetEvent(false);
             InstDG.ItemsSource = instList;
-            for (int i = 0; i < sim.numMarcos; i++)
+
+            // Principal memory table
+            int x = 0;
+            for (int i = 0; i < sim.numMarcosSO; i++)
             {
-                memList.Add(new Mem() { marco = i, page = -1 });
+                memList.Add(new Mem(i, "SO"));
+                x++;
+            }
+            
+            for (int i = 0 ; i < (sim.numMarcos-sim.numMarcosSO); i++)
+            {
+                
+                memList.Add(new Mem(x, "Libre"));
+                x++;
             }
             memDG.ItemsSource = memList;
+            // Secondary memory table
+            // Generate aleatory positions
+            List<MemSec> tempSec = new List<MemSec>();
+            for (int i = 0; i < sim.numPagProc; i++)
+            {
+                tempSec.Add(new MemSec(i));
+            }
+            secDG.ItemsSource = tempSec;
+
+            // Page table 
+            pageTableDG.ItemsSource= sim.tablaPag;
+
             t = null;
 
         }
@@ -147,13 +170,86 @@ namespace PaginationSimulator
 
         private void addInst_Click(object sender, RoutedEventArgs e)
         {   
-            Inst tempInst = new Inst();
+            ParseInst tempInst = new ParseInst(10,"L");
             instList.Add(tempInst); 
         }
 
         private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
+            string temp = "[0-9]+";
+            if (new Regex(temp).IsMatch(((TextBox)sender).Text) && new Regex(temp).IsMatch(e.Text))
+            {
+                Console.WriteLine(((TextBox)sender).Text);
+                Console.WriteLine(sim.tamProc);
+                if (int.Parse(((TextBox)sender).Text+ e.Text) < sim.tamProc)
+                {
+                    e.Handled = false;
+                }
+                else
+                {
+                    e.Handled = true;
+                }
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+
+
         }
+        private void lect_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBox temp = (TextBox) sender;
+            temp.Text = temp.Text == "L" ? "E": "L";
+        }
+
+        private void mem_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBox temp = (TextBox)sender;
+            switch (temp.Text)
+            {
+                case "SO":
+                    break;
+                case "Libre": temp.Text = "Ocupado";
+                    break;
+                case "Ocupado": temp.Text = "Libre";
+                    break;
+            }
+        }
+
     }
+
+    public class ParseInst
+    {
+        public ParseInst(int dir, string lec)
+        {
+            this.dir = dir;
+            this.lec = lec;
+        }
+        public int dir { get; set; }
+        public string lec { get; set; }
+    }
+
+    public class Mem
+    {
+        public Mem(int marco, string okupa)
+        {
+            this.marco = marco;
+            this.okupa = okupa;
+        }
+        public int marco { get; set; }
+        public string okupa { get; set; }
+    }
+    public class MemSec
+    {
+        public MemSec(int num)
+        {
+            this.num = num;
+        }
+
+        public int num { get; set; }
+    }
+
+
 }
