@@ -348,7 +348,7 @@
                                 <DataGridTemplateColumn Header="Dir Lógica">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding dir}" PreviewTextInput="OnPreviewTextInput" />
+                                            <TextBox Text="{Binding dir}" PreviewTextInput="OnPreviewTextInput" KeyUp="OnKeyUpDir"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

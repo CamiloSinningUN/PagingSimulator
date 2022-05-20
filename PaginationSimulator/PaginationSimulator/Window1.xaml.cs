@@ -170,18 +170,21 @@ namespace PaginationSimulator
 
         private void addInst_Click(object sender, RoutedEventArgs e)
         {   
-            ParseInst tempInst = new ParseInst(10,"L");
+            ParseInst tempInst = new ParseInst(0, "L");
             instList.Add(tempInst); 
         }
 
         private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            string temp = "[0-9]+";
-            if (new Regex(temp).IsMatch(((TextBox)sender).Text) && new Regex(temp).IsMatch(e.Text))
+            e.Handled = false;
+            return;
+            if (new Regex("[0-9]+").IsMatch(((TextBox)sender).Text + e.Text))
             {
                 Console.WriteLine(((TextBox)sender).Text);
+                Console.WriteLine(e.Text);
                 Console.WriteLine(sim.tamProc);
-                if (int.Parse(((TextBox)sender).Text+ e.Text) < sim.tamProc)
+
+                if (int.Parse(((TextBox)sender).Text + e.Text) < sim.tamProc)
                 {
                     e.Handled = false;
                 }
@@ -194,10 +197,36 @@ namespace PaginationSimulator
             {
                 e.Handled = true;
             }
-
-
-
         }
+
+        private void OnKeyUpDir (object sender, KeyEventArgs e)
+        {
+            TextBox tb = ((TextBox)sender);
+            Console.WriteLine(tb.Text);
+            Console.WriteLine(e.Key);
+
+            if(IsKeyADigit(e.Key))
+            {
+                ReduceDir(tb);
+            }else
+            {
+                ReduceDir(tb);
+            }
+        }
+
+        private void ReduceDir(TextBox tb)
+        {
+            try
+            {
+                while (int.Parse(tb.Text) >= sim.tamProc)
+                    tb.Text = tb.Text.Substring(0, tb.Text.Length - 1);
+            }
+            catch (FormatException ex)
+            {
+                tb.Text = "";
+            }
+        }
+
         private void lect_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             TextBox temp = (TextBox) sender;
@@ -217,6 +246,17 @@ namespace PaginationSimulator
                     break;
             }
         }
+
+        private static bool IsKeyAChar(Key key)
+        {
+            return key >= Key.A && key <= Key.Z;
+        }
+
+        private static bool IsKeyADigit(Key key)
+        {
+            return (key >= Key.D0 && key <= Key.D9) || (key >= Key.NumPad0 && key <= Key.NumPad9);
+        }
+
 
     }
 
@@ -250,6 +290,4 @@ namespace PaginationSimulator
 
         public int num { get; set; }
     }
-
-
 }
