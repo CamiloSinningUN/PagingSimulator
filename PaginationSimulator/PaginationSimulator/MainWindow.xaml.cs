@@ -23,6 +23,9 @@ namespace PaginationSimulator
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const int MAX_MB = 1024;
+        private const int MAX_KB = 1048576;
+        //private const int MAX_BYTE = 1073741824;
 
         public MainWindow()
         {
@@ -71,85 +74,24 @@ namespace PaginationSimulator
         //    return instruc;
         //}
 
-        void MainWindow_Closing(object sender, CancelEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private int convertUnit(ComboBox CB, int tam)
-        {
-            int conv = tam;
-            
-
-            switch (CB.SelectedItem.ToString().Split()[1])
-            {
-                case "KB":
-                    conv *= (int)Math.Pow(2, 10);
-                    break;
-                case "MB":
-                    conv *= (int)Math.Pow(2, 20);
-                    break;
-            }
-            Console.WriteLine(conv);
-            return conv;
-        }
-
-        #region TextChanged
-        private void Page_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            tamPage.Text = Regex.Replace(tamPage.Text, "[^0-9]+", "");
-        }
-
-        private void SO_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            tamSO.Text = Regex.Replace(tamSO.Text, "[^0-9]+", "");
-        }
-
-        private void Pro_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            tamPro.Text = Regex.Replace(tamPro.Text, "[^0-9]+", "");
-        }
-
-        private void Mem_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            tamMem.Text = Regex.Replace(tamMem.Text, "[^0-9]+", "");
-        }
-        #endregion
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Iniciar()
         {
             HideErrors();
-            
 
-            PagBajoDem sim = null;
+            int tamPageVal = CheckInput(tamPage, tamPageCB);
+            int tamProVal = CheckInput(tamPro, tamProCB);
+            int tamSOVal = CheckInput(tamSO, tamSOCB);
+            int tamMemVal = CheckInput(tamMem, tamMemCB);
+
+            if (tamPageVal == -1 || tamProVal == -1 || tamSOVal == -1 || tamMemVal == -1) return;
+
             try
             {
-                int tamPageVal, tamProVal, tamSOVal, tamMemVal;
-                
-                checked
-                {
-                    tamPageVal = convertUnit(tamPageCB, int.Parse(tamPage.Text));
-                    tamProVal = convertUnit(tamProCB, int.Parse(tamPro.Text));
-                    tamSOVal = convertUnit(tamSOCB, int.Parse(tamSO.Text));
-                    tamMemVal = convertUnit(tamMemCB, int.Parse(tamMem.Text));
-                }
-                sim = new PagBajoDem(tamPageVal, tamProVal, tamSOVal, tamMemVal);
+                PagBajoDem sim = new PagBajoDem(tamPageVal, tamProVal, tamSOVal, tamMemVal);
 
                 Window1 subWindow = new Window1(sim);
                 subWindow.Show();
                 this.Hide();
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                //Label L = (Label) ex.Source;
-
-            }
-            catch (OverflowException ex)
-            {
-                Console.WriteLine(ex.Message);
-
             }
             catch (PagBajoDem.PagBajoDemException ex)
             {
@@ -191,10 +133,51 @@ namespace PaginationSimulator
                         Pic2.Visibility = Visibility.Visible;
                         Error2.Visibility = Visibility.Visible;
                         break;
-                    default: //hacer algo
+                    case PagBajoDem.PagBajoDemException.NUM_MARCOS_EXCEPTION: //hacer algo
+                        Error4.Content = ex.Message;
+                        Pic4.Visibility = Visibility.Visible;
+                        Error4.Visibility = Visibility.Visible;
                         break;
                 }
             }
+        }
+
+        void MainWindow_Closing(object sender, CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        #region TextChanged
+        private void Page_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            tamPage.Text = Regex.Replace(tamPage.Text, "[^0-9]+", "");
+        }
+
+        private void SO_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            tamSO.Text = Regex.Replace(tamSO.Text, "[^0-9]+", "");
+        }
+
+        private void Pro_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            tamPro.Text = Regex.Replace(tamPro.Text, "[^0-9]+", "");
+        }
+
+        private void Mem_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            tamMem.Text = Regex.Replace(tamMem.Text, "[^0-9]+", "");
+        }
+        #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Iniciar();
+        }
+
+        private void Iniciar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+                Iniciar();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -219,6 +202,83 @@ namespace PaginationSimulator
             Error4.Visibility = Visibility.Hidden;
         }
         
-       
+        private int CheckInput(TextBox tb, ComboBox cb)
+        {
+            try
+            {
+                int val = checked(int.Parse(tb.Text) * (int)Math.Pow(2, cb.SelectedIndex * 10));
+                return val;
+            }
+            catch (FormatException ex)
+            {
+                string msg = "Debe ingresar un valor numérico";
+                if (tb.Equals(tamPage))
+                {
+                    Error1.Content = msg;
+                    Error1.Visibility = Visibility.Visible;
+                    Pic1.Visibility = Visibility.Visible;
+                }
+                else if (tb.Equals(tamSO))
+                {
+                    Error2.Content = msg;
+                    Error2.Visibility = Visibility.Visible;
+                    Pic2.Visibility = Visibility.Visible;
+                }
+                else if (tb.Equals(tamPro))
+                {
+                    Error3.Content = msg;
+                    Error3.Visibility = Visibility.Visible;
+                    Pic3.Visibility = Visibility.Visible;
+                }
+                else if (tb.Equals(tamMem))
+                {
+                    Error4.Content = msg;
+                    Error4.Visibility = Visibility.Visible;
+                    Pic4.Visibility = Visibility.Visible;
+                }
+            }
+            catch(OverflowException ex)
+            {
+                string msg = "Valor máximo = ";
+                switch(cb.SelectedIndex)
+                {
+                    case 0:
+                        msg += $"{int.MaxValue} bytes";
+                        break;
+                    case 1:
+                        msg += $"{MAX_KB} KB";
+                        break;
+                    case 2:
+                        msg += $"{MAX_MB} MB";
+                        break;
+                }
+
+                if (tb.Equals(tamPage))
+                {
+                    Error1.Content = msg;
+                    Error1.Visibility = Visibility.Visible;
+                    Pic1.Visibility = Visibility.Visible;
+                }
+                else if (tb.Equals(tamSO))
+                {
+                    Error2.Content = msg;
+                    Error2.Visibility = Visibility.Visible;
+                    Pic2.Visibility = Visibility.Visible;
+                }
+                else if (tb.Equals(tamPro))
+                {
+                    Error3.Content = msg;
+                    Error3.Visibility = Visibility.Visible;
+                    Pic3.Visibility = Visibility.Visible;
+                }
+                else if (tb.Equals(tamMem))
+                {
+                    Error4.Content = msg;
+                    Error4.Visibility = Visibility.Visible;
+                    Pic4.Visibility = Visibility.Visible;
+                }
+            }
+            return -1;
+        }
     }
 }

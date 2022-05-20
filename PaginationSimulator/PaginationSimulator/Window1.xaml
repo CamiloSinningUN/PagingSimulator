@@ -673,7 +673,7 @@
                     </DataGrid>
                 </ScrollViewer>
                 <Label Content="Tabla de páginas" FontFamily="Fugaz one" FontSize="30" Margin="0" HorizontalContentAlignment="Center" Grid.Row="1"/>
-                <ScrollViewer Grid.RowSpan="2" Grid.Row="1" Margin="0,50,0,0">
+                <ScrollViewer Grid.RowSpan="2" Grid.Row="1" Margin="0,50,0,0" HorizontalAlignment="Center">
                     <DataGrid x:Name="pageTableDG" ItemsSource="{Binding}" AutoGenerateColumns="False" Background="#FFB9B9B9" BorderBrush="#FFE0E0E0" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="0" Foreground="Black" HorizontalAlignment="Center" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Indice" Binding="{Binding index}" IsReadOnly="True"/>

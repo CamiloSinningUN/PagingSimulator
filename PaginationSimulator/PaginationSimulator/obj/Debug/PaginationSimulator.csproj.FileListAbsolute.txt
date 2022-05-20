@@ -55,3 +55,23 @@ C:\Users\Eliana V\Documents\g2\Lab_SO\PaginationSimulator\PaginationSimulator\ob
 C:\Users\Eliana V\Documents\g2\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.csproj.CoreCompileInputs.cache
 C:\Users\Eliana V\Documents\g2\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.exe
 C:\Users\Eliana V\Documents\g2\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.pdb
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\bin\Debug\PaginationSimulator.exe.config
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\bin\Debug\PaginationSimulator.exe
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\bin\Debug\PaginationSimulator.pdb
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.csproj.AssemblyReference.cache
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.csproj.SuggestedBindingRedirects.cache
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\MainWindow.g.cs
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PopUpFinish.g.cs
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\Window1.g.cs
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\App.g.cs
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator_MarkupCompile.cache
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator_MarkupCompile.lref
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\MainWindow.baml
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PopUpFinish.baml
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\Window1.baml
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.g.resources
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.Properties.Resources.resources
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.csproj.GenerateResource.cache
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.csproj.CoreCompileInputs.cache
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.exe
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.pdb

@@ -54,12 +54,15 @@ namespace PaginationSimulator.src
             
 
             this.numMarcos = tamMP / tamMarco;
+            if(numMarcos > MAX_MARCOS)
+                throw new PagBajoDemException($"Por problemas de rendimiento, no se permiten más de ({MAX_MARCOS} marcos).", PagBajoDemException.NUM_MARCOS_EXCEPTION);
+
             this.numMarcosProc = (tamProc + tamMarco - 1) / tamMarco;
             this.numMarcosSO = (tamSO + tamMarco - 1) / tamMarco;
 
             int sum = numMarcosSO + numMarcosProc;
             if (sum > numMarcos)
-                throw new PagBajoDemException($"Marcos para SO y proceso ({numMarcosSO} + {numMarcosProc} = {sum}) superan marcos totales ({numMarcos})", PagBajoDemException.SO_AND_PROC_EXCEPTION);
+                throw new PagBajoDemException($"Marcos para SO y proceso ({numMarcosSO} + {numMarcosProc} = {sum}) superan marcos totales ({numMarcos}).", PagBajoDemException.SO_AND_PROC_EXCEPTION);
         }
         private void initMarcosSO()
         {
@@ -195,7 +198,7 @@ namespace PaginationSimulator.src
             public const byte PROC_EXCEPTION = 4;
             public const byte MARCO_EXCEPTION = 5;
             public const byte SO_AND_PROC_EXCEPTION = 6;
-          
+            public const byte NUM_MARCOS_EXCEPTION = 7;
 
         }
     }
@@ -219,6 +222,8 @@ namespace PaginationSimulator.src
         public ObservableCollection<TablaPagRow> tablaPag;
         private LinkedList<int> marcosUsage;
         private bool allMarcosLlenos;
+
+        private const int MAX_MARCOS = 512;
 
         // Algoritmos
         public const byte FIFO = 0;
