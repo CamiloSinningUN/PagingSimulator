@@ -334,8 +334,7 @@
                 <Grid Margin="0,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="34
-                                       "/>
+                        <RowDefinition Height="44"/>
                     </Grid.RowDefinitions>
                     <ScrollViewer Margin="0,50,0,0" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Row="0">
                         <DataGrid x:Name="InstDG" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Center" Background="White" BorderBrush="White" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0" Padding="0" Foreground="Black" HorizontalScrollBarVisibility="Disabled" >
@@ -362,37 +361,70 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </ScrollViewer>
-                    <Border BorderThickness="1" CornerRadius="10,10,10,10"  Background="#FFC4C4C4" Margin="0,0,16,5" Grid.Row="1" Height="30" Width="240">
-                        <Button x:Name="addInst" BorderBrush="{x:Null}" Click="addInst_Click" >
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Background" Value="Green"/>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border Background="{TemplateBinding Background}">
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+                        <Border BorderThickness="1" CornerRadius="10,10,10,10"  Background="#FFC4C4C4" Height="40" Width="240">
+                            <Button x:Name="addInst" BorderBrush="{x:Null}" Click="addInst_Click" >
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="Green"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
 
-                                </Style>
-                            </Button.Style>
-                            <Button.Background>
-                                <ImageBrush ImageSource="assets/Plus Math.png" Stretch="None">
-                                    <ImageBrush.RelativeTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.75" ScaleY="0.75"/>
-                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                            <RotateTransform CenterY="0.5" CenterX="0.5"/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </ImageBrush.RelativeTransform>
-                                </ImageBrush>
-                            </Button.Background>
-                        </Button>
-                    </Border>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Background>
+                                    <ImageBrush ImageSource="assets/Plus Math.png" Stretch="None">
+                                        <ImageBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.75" ScaleY="0.75"/>
+                                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                                <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </ImageBrush.RelativeTransform>
+                                    </ImageBrush>
+                                </Button.Background>
+                            </Button>
+                        </Border>
+                        <Border BorderThickness="1" CornerRadius="10,10,10,10"  Background="#FFC4C4C4" Height="40" Width="40">
+                            <Button x:Name="addInst1" BorderBrush="{x:Null}" Click="readCSVInst_Click" >
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="Green"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+
+                                    </Style>
+                                </Button.Style>
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/assets/CSV.png" Stretch="Uniform">
+                                        <ImageBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.75" ScaleY="0.75"/>
+                                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                                <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </ImageBrush.RelativeTransform>
+                                    </ImageBrush>
+                                </Button.Background>
+                            </Button>
+                        </Border>
+                    </StackPanel>
                 </Grid>
                 <StackPanel Margin="0,0,0,10" Grid.Row="2" VerticalAlignment="Bottom">
                     <!--#table -->

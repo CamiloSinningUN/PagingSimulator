@@ -75,3 +75,8 @@ D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\o
 D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.csproj.CoreCompileInputs.cache
 D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.exe
 D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.pdb
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.csproj.SuggestedBindingRedirects.cache
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\bin\Debug\Ookii.Dialogs.Wpf.dll
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\bin\Debug\Ookii.Dialogs.Wpf.pdb
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\bin\Debug\Ookii.Dialogs.Wpf.xml
+C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.csproj.CopyComplete
