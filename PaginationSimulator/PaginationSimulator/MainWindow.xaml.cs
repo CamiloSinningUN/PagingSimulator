@@ -229,5 +229,17 @@ namespace PaginationSimulator
             }
             return -1;
         }
+
+        private void inputGotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            if (tb.Text == "0") tb.Text = "";
+        }
+
+        private void inputLostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            if (tb.Text == "") tb.Text = "0";
+        }
     }
 }
