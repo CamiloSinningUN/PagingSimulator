@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PaginationSimulator.src
 {
@@ -29,7 +27,7 @@ namespace PaginationSimulator.src
             this.marcos = new byte[numMarcos];
             initMarcosSO();
             this.numPagProc = (tamProc + tamMarco - 1) / tamMarco;
-            this.tablaPag = new ObservableCollection<TablaPagRow>(new List<TablaPagRow>(numPagProc));
+            this.tablaPag = new Pag[numPagProc];
             initTablaPag();
             this.allMarcosLlenos = false;
             this.marcosUsage = new LinkedList<int>();
@@ -64,15 +62,17 @@ namespace PaginationSimulator.src
             if (sum > numMarcos)
                 throw new PagBajoDemException($"Marcos para SO y proceso ({numMarcosSO} + {numMarcosProc} = {sum}) superan marcos totales ({numMarcos}).", PagBajoDemException.SO_AND_PROC_EXCEPTION);
         }
+
         private void initMarcosSO()
         {
             for (int i = 0; i < numMarcosSO; i++)
                 marcos[i] = MARCO_CON_SO;
         }
+
         private void initTablaPag()
         {
             for (int i = 0; i < numPagProc; i++)
-                tablaPag.Add( new TablaPagRow(-1, false, false, 0, i));
+                tablaPag[i] = new Pag(-1, false, false, -1, i);
         }
         
         public void InitMarcos(bool[] marcosInit)
@@ -94,7 +94,7 @@ namespace PaginationSimulator.src
                 if (marco == -1)
                 {
                     marco = marcosUsage.ElementAt(0);
-                    TablaPagRow pagVictim = getPageFromMarco(marco);
+                    Pag pagVictim = getPageFromMarco(marco);
                     
                     swapOut = pagVictim.dirty;
                     pagVictim.valid = pagVictim.dirty = false;
@@ -152,13 +152,11 @@ namespace PaginationSimulator.src
             return marco;
         }
 
-        private TablaPagRow getPageFromMarco(int marco)
+        private Pag getPageFromMarco(int marco)
         {
-            for (int i = 0; i < tablaPag.Count; i++) if (tablaPag[i].valid && tablaPag[i].marco == marco)
-                {
-                    Console.WriteLine($"*******************{i}");
+            for (int i = 0; i < tablaPag.Length; i++)
+                if (tablaPag[i].valid && tablaPag[i].marco == marco)
                     return tablaPag[i];
-                }
             return null;
         }
         public void printMarcos()
@@ -179,15 +177,15 @@ namespace PaginationSimulator.src
         public void printTablePag()
         {
             Console.WriteLine("TablaPag:");
-            foreach (TablaPagRow p in tablaPag)
+            foreach (Pag p in tablaPag)
                 Console.WriteLine($"marco={p.marco}, valid={p.valid}, dirty={p.dirty}");
             Console.WriteLine("");
         }
 
-        public ObservableCollection<TablaPagRow> getTablePag()
+        public ObservableCollection<Pag> getTablePag()
         {
-            ObservableCollection<TablaPagRow> temp = new ObservableCollection<TablaPagRow>();
-            foreach (TablaPagRow p in tablaPag)
+            ObservableCollection<Pag> temp = new ObservableCollection<Pag>();
+            foreach (Pag p in tablaPag)
                 temp.Add(p);
             return temp;
         }
@@ -197,7 +195,7 @@ namespace PaginationSimulator.src
             this.numFallosPag = 0;
             this.numReemp = 0;
             this.marcos = new byte[numMarcos];
-            this.tablaPag = new ObservableCollection<TablaPagRow>(new List<TablaPagRow>(numPagProc));
+            this.tablaPag = new Pag[numPagProc];
             initTablaPag();
             this.marcosUsage = new LinkedList<int>();
             this.allMarcosLlenos = false;
@@ -238,7 +236,7 @@ namespace PaginationSimulator.src
         public int numFallosPag;
         public int numReemp;
         private byte[] marcos;
-        public ObservableCollection<TablaPagRow> tablaPag;
+        public Pag[] tablaPag;
         private LinkedList<int> marcosUsage;
         private bool allMarcosLlenos;
 

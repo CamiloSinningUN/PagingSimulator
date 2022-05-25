@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PaginationSimulator.src
 {
-    public class TablaPagRow
+    public class Pag
     {
-        public TablaPagRow(int marco, bool valid, bool dirty, int time, int index)
+        public Pag(int marco, bool valid, bool dirty, int time, int index)
         {
             this.marco = marco;
             this.valid = valid;

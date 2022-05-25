@@ -26,8 +26,9 @@ namespace PaginationSimulator
         Thread t;
         Instruc[] instruc;
         ManualResetEvent mrse;
-        ObservableCollection<ParseInst> instList;
-        ObservableCollection<Mem> memList;
+        ObservableCollection<InstRow> instList;
+        ObservableCollection<MemRow> memList;
+        ObservableCollection<PagRow> pagList;
 
         public Window1(MainWindow mw, PagBajoDem sim)
         {
@@ -36,9 +37,9 @@ namespace PaginationSimulator
             this.mw = mw;
             this.sim = sim;
 
-            instList = new ObservableCollection<ParseInst>();
-            memList = new ObservableCollection<Mem>();
-            //t = null;
+            instList = new ObservableCollection<InstRow>();
+            memList = new ObservableCollection<MemRow>();
+            pagList = new ObservableCollection<PagRow>();
             mrse = new ManualResetEvent(initialState: true);
 
             this.Closing += new CancelEventHandler(Window1_Closing);
@@ -61,10 +62,10 @@ namespace PaginationSimulator
         {
             int i = 0;
             for (; i < sim.numMarcosSO; i++)
-                memList.Add(new Mem(i, "SO"));
+                memList.Add(new MemRow(i, "SO"));
 
             for (; i < sim.numMarcos; i++)
-                memList.Add(new Mem(i, "Libre"));
+                memList.Add(new MemRow(i, "Libre"));
 
             memDG.ItemsSource = memList;
         }
@@ -73,15 +74,30 @@ namespace PaginationSimulator
         {
             // Secondary memory table
             // Generate aleatory positions
-            List<MemSec> tempSec = new List<MemSec>();
+            List<MemRowSec> tempSec = new List<MemRowSec>();
             for (int i = 0; i < sim.numPagProc; i++)
-                tempSec.Add(new MemSec(i));
+                tempSec.Add(new MemRowSec(i));
             secDG.ItemsSource = tempSec;
         }
 
         private void initTablaPag()
         {
-            pageTableDG.ItemsSource = sim.tablaPag;
+            for (int i = 0; i < sim.tablaPag.Length; i++)
+            {
+                PagRow row = new PagRow();
+                row.FromPag(sim.tablaPag[i]);
+                pagList.Add(row);
+            }
+            pageTableDG.ItemsSource = pagList;
+        }
+
+        private void updateTablaPag()
+        {
+            for(int i = 0; i < sim.tablaPag.Length; i++)
+                pagList[i].FromPag(sim.tablaPag[i]);
+            
+            pageTableDG.ItemsSource = null;
+            pageTableDG.ItemsSource = pagList;
         }
 
         private void Run()
@@ -92,10 +108,15 @@ namespace PaginationSimulator
                 mrse.WaitOne();
                 Console.WriteLine("New instruction...");
                 sim.ExInstruc(instruc[i], i);
+                
+                this.Dispatcher.Invoke(() =>
+                {
+                    updateTablaPag();
+                });
             }
             Console.WriteLine("All done!");
             this.Dispatcher.Invoke(() => resetSimul());
-            
+
         }
 
         private void play_Click(object sender, RoutedEventArgs e)
@@ -107,38 +128,19 @@ namespace PaginationSimulator
             pause.Visibility = Visibility.Visible;
             Reset.Visibility = Visibility.Visible;
 
+            updateTablaPag();
+
             //sim.InitMarcos(genMarcosInit(sim.numMarcos));
-            //bool[] marcos = Mem.parse(memList);
-            sim.InitMarcos(Mem.parse(memList));
-            sim.alg = method.Text == "FIFO" ? PagBajoDem.FIFO : PagBajoDem.LRU;
+            sim.InitMarcos(MemRow.parse(memList));
+            
             //instruc = genInstruc(sim.tamProc, 10);
-            instruc = ParseInst.parse(instList);
+            instruc = InstRow.parse(instList);
 
-            //for (int i = 0; i < InstDG.Items.Count; i++)
-            //    Console.WriteLine($"instruc: (dir={instruc[i].dir}, lec={instruc[i].lec})");
-            //    //Console.WriteLine($"instruc: (dir={instList[i].dir}, lec={instList[i].lec})");
+            sim.alg = method.Text == "FIFO" ? PagBajoDem.FIFO : PagBajoDem.LRU;
 
-            //for (int i = 0; i < memDG.Items.Count; i++)
-            //    //Console.WriteLine(memList[i].okupa);
-            //    Console.WriteLine(marcos[i]);
-
-            //for(int i = 0; i < instruc.Length; i++)
-            //{
-            //    sim.ExInstruc(instruc[i], i);
-            //}
-
-            //return;
-            if (true)
-            {
-                Console.WriteLine("Creando nuevo thread...");
-                t = new Thread(new ThreadStart(Run));
-                t.Start();
-            }
-            else
-            {
-                Console.WriteLine("Thread ya existente...");
-                mrse.Set();
-            }
+            Console.WriteLine("Creando nuevo thread...");
+            t = new Thread(new ThreadStart(Run));
+            t.Start();
         }
 
         private void reset_Click(object sender, RoutedEventArgs e)
@@ -159,9 +161,9 @@ namespace PaginationSimulator
             try
             {
                 t.Abort();
-            }catch(ThreadAbortException e)
+            }catch(ThreadAbortException)
             {
-                Console.WriteLine("akjbsdjlanmsdkña,s");
+                Console.WriteLine("ERROR: Thread no pudo abortarse");
             }
             
             mrse.Set();
@@ -217,9 +219,8 @@ namespace PaginationSimulator
         }
 
         private void addInst_Click(object sender, RoutedEventArgs e)
-        {   
-            ParseInst tempInst = new ParseInst(0, "L");
-            instList.Add(tempInst);
+        {
+            instList.Add(new InstRow(0, "L"));
         }
 
         private void OnKeyUpDir (object sender, KeyEventArgs e)
@@ -245,7 +246,7 @@ namespace PaginationSimulator
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            TextBox tb = ((TextBox)sender);
+            TextBox tb = (TextBox)sender;
             if (tb.Text == "") tb.Text = "0";
         }
 
@@ -262,11 +263,6 @@ namespace PaginationSimulator
             if (temp.Text == "SO") return;
             temp.Text = temp.Text == "Libre" ? "Ocupado" : "Libre";
             memList[memDG.SelectedIndex].okupa = temp.Text;
-        }
-
-        private static bool IsKeyADigit(Key key)
-        {
-            return (key >= Key.D0 && key <= Key.D9) || (key >= Key.NumPad0 && key <= Key.NumPad9);
         }
 
         private void readCSVInst_Click(object sender, RoutedEventArgs e)
@@ -389,27 +385,24 @@ namespace PaginationSimulator
                 {
                     for (int i = 0; i < listDir.Count; i++)
                     {
-                        ParseInst tempInst = new ParseInst(listDir[i], listLect[i]);
+                        InstRow tempInst = new InstRow(listDir[i], listLect[i]);
                         instList.Add(tempInst);
                     }
                 }
-                
-            }   
+            }
 
         }
-
-
     }
 
-    public class ParseInst
+    public class InstRow
     {
-        public ParseInst(int dir, string lec)
+        public InstRow(int dir, string lec)
         {
             this.dir = dir;
             this.lec = lec;
         }
 
-        public static Instruc[] parse(ObservableCollection<ParseInst> p)
+        public static Instruc[] parse(ObservableCollection<InstRow> p)
         {
             Instruc[] instruc = new Instruc[p.Count];
             for (int i = 0; i < p.Count; i++)
@@ -421,15 +414,15 @@ namespace PaginationSimulator
         public string lec { get; set; }
     }
 
-    public class Mem
+    public class MemRow
     {
-        public Mem(int marco, string okupa)
+        public MemRow(int marco, string okupa)
         {
             this.marco = marco;
             this.okupa = okupa;
         }
 
-        public static bool[] parse(ObservableCollection<Mem> m)
+        public static bool[] parse(ObservableCollection<MemRow> m)
         {
             bool[] marcos = new bool[m.Count];
             for (int i = 0; i < m.Count; i++)
@@ -440,13 +433,42 @@ namespace PaginationSimulator
         public int marco { get; set; }
         public string okupa { get; set; }
     }
-    public class MemSec
+    public class MemRowSec
     {
-        public MemSec(int num)
+        public MemRowSec(int num)
         {
             this.num = num;
         }
 
         public int num { get; set; }
+    }
+
+    public class PagRow
+    {
+        public PagRow() { }
+
+        public PagRow(int index, string marco, byte valid, byte dirty, string time)
+        {
+            this.index = index;
+            this.marco = marco;
+            this.valid = valid;
+            this.dirty= dirty;
+            this.time = time;
+        }
+
+        public void FromPag(Pag pag)
+        {
+            this.valid = (byte)(pag.valid ? 1 : 0);
+            this.dirty = (byte)(pag.dirty ? 1 : 0);
+            this.index = pag.index;
+            this.marco = pag.marco == -1 ? "-" : pag.marco.ToString();
+            this.time = pag.time == -1 ? "-" : pag.time.ToString();
+        }
+
+        public int index { get; set; }
+        public string marco { get; set; }
+        public byte valid { get; set; }
+        public byte dirty { get; set; }
+        public string time { get; set; }
     }
 }

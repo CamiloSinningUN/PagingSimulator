@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using PaginationSimulator.src;
 
 namespace PaginationSimulator
@@ -31,48 +21,7 @@ namespace PaginationSimulator
         {
             InitializeComponent();
             this.Closing += new CancelEventHandler(MainWindow_Closing);
-
-
-
-
-
-        //    int tammarco = 64;
-        //    int tamproc = 64;
-        //    int tamso = 64;
-        //    int tammp = 128;
-        //    byte alg = PagBajoDem.FIFO;
-
-        //    PagBajoDem simul = new PagBajoDem(tammarco, tamproc, tamso, tammp);
-        //    Console.WriteLine(simul.tablaPag.Count);
-        //    simul.InitMarcos(genMarcosInit(simul.numMarcos));
-        //    simul.alg = alg;
-
-        //    List<Instruc> instruc = genInstruc(simul.tamProc, 10);
-        //    simul.printMarcos();
-        //    for (int i = 0; i < instruc.Count; i++)
-        //        simul.ExInstruc(instruc[i], i);
-
-        //    simul.printMarcos();
-        //    simul.printMarcosUsage();
         }
-
-        //static bool[] genMarcosInit(int numMarcos)
-        //{
-        //    Random rnd = new Random();
-        //    bool[] marcos = new bool[numMarcos];
-        //    for (int i = 0; i < numMarcos; i++)
-        //        marcos[i] = rnd.Next(10) >= 3;
-        //    return marcos;
-        //}
-
-        //static List<Instruc> genInstruc(int tamProc, int numInst)
-        //{
-        //    List<Instruc> instruc = new List<Instruc>();
-        //    Random rnd = new Random();
-        //    for (int i = 0; i < numInst; i++)
-        //        instruc.Add(new Instruc(rnd.Next(0, tamProc), rnd.Next(10) < 5));
-        //    return instruc;
-        //}
 
         private void Iniciar()
         {
