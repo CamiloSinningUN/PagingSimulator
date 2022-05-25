@@ -21,6 +21,7 @@ namespace PaginationSimulator
         {
             InitializeComponent();
             this.Closing += new CancelEventHandler(MainWindow_Closing);
+            tamPage.Focus();
         }
 
         private void Iniciar()

@@ -99,8 +99,6 @@ namespace PaginationSimulator.src
                     swapOut = pagVictim.dirty;
                     pagVictim.valid = pagVictim.dirty = false;
 
-                    printTablePag();
-
                     numReemp++;
                     Console.WriteLine($"Marco tomado: {marco}, víctima: {pagVictim.marco}, swap_out: {swapOut}");
                     if (alg == FIFO)
@@ -235,8 +233,8 @@ namespace PaginationSimulator.src
         public int numPagProc;
         public int numFallosPag;
         public int numReemp;
-        private byte[] marcos;
-        public Pag[] tablaPag;
+        public byte[] marcos { get; set; }
+        public Pag[] tablaPag { get; set; }
         private LinkedList<int> marcosUsage;
         private bool allMarcosLlenos;
 

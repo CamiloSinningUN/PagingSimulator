@@ -100,6 +100,16 @@ namespace PaginationSimulator
             pageTableDG.ItemsSource = pagList;
         }
 
+
+        private void updateMem()
+        {
+            for (int i = 0; i < sim.marcos.Length; i++)
+                memList[i].FromMarco(sim.marcos[i]);
+
+            memDG.ItemsSource = null;
+            memDG.ItemsSource = memList;
+        }
+
         private void Run()
         {
             for (int i = 0; i < instruc.Length; i++)
@@ -112,6 +122,7 @@ namespace PaginationSimulator
                 this.Dispatcher.Invoke(() =>
                 {
                     updateTablaPag();
+                    updateMem();
                 });
             }
             Console.WriteLine("All done!");
@@ -129,6 +140,7 @@ namespace PaginationSimulator
             Reset.Visibility = Visibility.Visible;
 
             updateTablaPag();
+            updateMem();
 
             //sim.InitMarcos(genMarcosInit(sim.numMarcos));
             sim.InitMarcos(MemRow.parse(memList));
@@ -428,6 +440,25 @@ namespace PaginationSimulator
             for (int i = 0; i < m.Count; i++)
                 marcos[i] = m[i].okupa == "Libre";
             return marcos;
+        }
+
+        public void FromMarco(byte marco)
+        {
+            switch(marco)
+            {
+                case PagBajoDem.MARCO_OCCUP_PREV:
+                    this.okupa = "Ocupado";
+                    break;
+                case PagBajoDem.MARCO_FREE:
+                    this.okupa = "Libre";
+                    break;
+                case PagBajoDem.MARCO_CON_PAG:
+                    this.okupa = "Proceso";
+                    break;
+                case PagBajoDem.MARCO_CON_SO:
+                    this.okupa = "SO";
+                    break;
+            }
         }
 
         public int marco { get; set; }
