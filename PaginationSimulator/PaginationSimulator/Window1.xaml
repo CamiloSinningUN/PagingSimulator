@@ -347,14 +347,14 @@
                                 <DataGridTemplateColumn Header="Dir Lógica">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding dir}" PreviewTextInput="OnPreviewTextInput" KeyUp="OnKeyUpDir"/>
+                                            <TextBox Text="{Binding dir}" KeyUp="OnKeyUpDir" LostFocus="TextBox_LostFocus"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Header="Lect/Ecri">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding lec}" PreviewTextInput="OnPreviewTextInput" PreviewMouseDown="lect_PreviewMouseDown" IsReadOnly="True"/>
+                                            <TextBox Text="{Binding lec}" PreviewMouseDown="lect_PreviewMouseDown" IsReadOnly="True"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -540,8 +540,8 @@
                             <StaticResource ResourceKey="Play"/>
                         </Button>
                         <ComboBox x:Name="method" Margin="0" BorderBrush="Black" FontFamily="Fugaz one" FontSize="30" Background="#FF4361EE" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="0.479,0.492" SelectedIndex="1" Style="{DynamicResource borderRadius}" Grid.Column="1" Foreground="White">
-                            <ComboBoxItem Content="LRU" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
                             <ComboBoxItem Content="FIFO" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+                            <ComboBoxItem Content="LRU" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
                         </ComboBox>
                         <Button x:Name="Reset"  Grid.Column="1"  Background="#FFFB3640" Margin="0" Foreground="{x:Null}" BorderBrush="{x:Null}" Visibility="Hidden" Click="reset_Click">
                             <Button.Resources>

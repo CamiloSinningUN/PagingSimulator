@@ -294,27 +294,21 @@ namespace PaginationSimulator {
             {
             case 2:
             
-            #line 350 "..\..\Window1.xaml"
-            ((System.Windows.Controls.TextBox)(target)).PreviewTextInput += new System.Windows.Input.TextCompositionEventHandler(this.OnPreviewTextInput);
+            #line 351 "..\..\Window1.xaml"
+            ((System.Windows.Controls.TextBox)(target)).KeyUp += new System.Windows.Input.KeyEventHandler(this.OnKeyUpDir);
             
             #line default
             #line hidden
             
-            #line 350 "..\..\Window1.xaml"
-            ((System.Windows.Controls.TextBox)(target)).KeyUp += new System.Windows.Input.KeyEventHandler(this.OnKeyUpDir);
+            #line 351 "..\..\Window1.xaml"
+            ((System.Windows.Controls.TextBox)(target)).LostFocus += new System.Windows.RoutedEventHandler(this.TextBox_LostFocus);
             
             #line default
             #line hidden
             break;
             case 3:
             
-            #line 357 "..\..\Window1.xaml"
-            ((System.Windows.Controls.TextBox)(target)).PreviewTextInput += new System.Windows.Input.TextCompositionEventHandler(this.OnPreviewTextInput);
-            
-            #line default
-            #line hidden
-            
-            #line 357 "..\..\Window1.xaml"
+            #line 358 "..\..\Window1.xaml"
             ((System.Windows.Controls.TextBox)(target)).PreviewMouseDown += new System.Windows.Input.MouseButtonEventHandler(this.lect_PreviewMouseDown);
             
             #line default

@@ -22,7 +22,7 @@ namespace PaginationSimulator
     {
         public PagBajoDem sim;
         Thread t;
-        List<Instruc> instruc;
+        Instruc[] instruc;
         ManualResetEvent mrse;
         ObservableCollection<ParseInst> instList = new ObservableCollection<ParseInst>();
         ObservableCollection<Mem> memList = new ObservableCollection<Mem>();
@@ -41,40 +41,31 @@ namespace PaginationSimulator
             InstDG.ItemsSource = instList;
 
             // Principal memory table
-            int x = 0;
-            for (int i = 0; i < sim.numMarcosSO; i++)
-            {
+            int i = 0;
+            for (; i < sim.numMarcosSO; i++)
                 memList.Add(new Mem(i, "SO"));
-                x++;
-            }
-            
-            for (int i = 0 ; i < (sim.numMarcos-sim.numMarcosSO); i++)
-            {
-                
-                memList.Add(new Mem(x, "Libre"));
-                x++;
-            }
+
+            for (; i < sim.numMarcos; i++)
+                memList.Add(new Mem(i, "Libre"));
+
             memDG.ItemsSource = memList;
 
             // Secondary memory table
             // Generate aleatory positions
             List<MemSec> tempSec = new List<MemSec>();
-            for (int i = 0; i < sim.numPagProc; i++)
-            {
+            for (i = 0; i < sim.numPagProc; i++)
                 tempSec.Add(new MemSec(i));
-            }
             secDG.ItemsSource = tempSec;
 
             // Page table 
             pageTableDG.ItemsSource= sim.tablaPag;
 
             t = null;
-
         }
 
         private void Run()
         {
-            for (int i = 0; i < instruc.Count; i++)
+            for (int i = 0; i < instruc.Length; i++)
             {
                 Console.WriteLine("asdasd");
                 mrse.WaitOne();
@@ -90,9 +81,11 @@ namespace PaginationSimulator
             pause.Visibility = Visibility.Visible;
             Reset.Visibility = Visibility.Visible;
 
-            sim.InitMarcos(genMarcosInit(sim.numMarcos));
-            sim.alg = PagBajoDem.FIFO;
-            instruc = genInstruc(sim.tamProc, 10);
+            //sim.InitMarcos(genMarcosInit(sim.numMarcos));
+            sim.InitMarcos(Mem.parse(memList));
+            sim.alg = method.Text == "FIFO" ? PagBajoDem.FIFO : PagBajoDem.LRU;
+            //instruc = genInstruc(sim.tamProc, 10);
+            instruc = ParseInst.parse(instList);
 
             if (t == null)
             {
@@ -168,48 +161,11 @@ namespace PaginationSimulator
             instList.Add(tempInst); 
         }
 
-        private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = false;
-            return;
-            if (new Regex("[0-9]+").IsMatch(((TextBox)sender).Text + e.Text))
-            {
-                Console.WriteLine(((TextBox)sender).Text);
-                Console.WriteLine(e.Text);
-                Console.WriteLine(sim.tamProc);
-
-                if (int.Parse(((TextBox)sender).Text + e.Text) < sim.tamProc)
-                {
-                    e.Handled = false;
-                }
-                else
-                {
-                    e.Handled = true;
-                }
-            }
-            else
-            {
-                e.Handled = true;
-            }
-        }
-
         private void OnKeyUpDir (object sender, KeyEventArgs e)
         {
             TextBox tb = ((TextBox)sender);
-            Console.WriteLine(tb.Text);
-            Console.WriteLine(e.Key);
-
-            if(IsKeyADigit(e.Key))
-            {
-                ReduceDir(tb);
-            }else
-            {
-                ReduceDir(tb);
-            }
-        }
-
-        private void ReduceDir(TextBox tb)
-        {
+            //Console.WriteLine(tb.Text);
+            //Console.WriteLine(e.Key);
             try
             {
                 while (int.Parse(tb.Text) >= sim.tamProc)
@@ -241,9 +197,10 @@ namespace PaginationSimulator
             }
         }
 
-        private static bool IsKeyAChar(Key key)
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            return key >= Key.A && key <= Key.Z;
+            TextBox tb = ((TextBox)sender);
+            if (tb.Text == "") tb.Text = "0";
         }
 
         private static bool IsKeyADigit(Key key)
@@ -390,6 +347,15 @@ namespace PaginationSimulator
             this.dir = dir;
             this.lec = lec;
         }
+
+        public static Instruc[] parse(ObservableCollection<ParseInst> p)
+        {
+            Instruc[] instruc = new Instruc[p.Count];
+            for (int i = 0; i < p.Count; i++)
+                instruc[i] = new Instruc(p[i].dir, p[i].lec == "L");
+            return instruc;
+        }
+
         public int dir { get; set; }
         public string lec { get; set; }
     }
@@ -401,6 +367,15 @@ namespace PaginationSimulator
             this.marco = marco;
             this.okupa = okupa;
         }
+
+        public static bool[] parse(ObservableCollection<Mem> m)
+        {
+            bool[] marcos = new bool[m.Count];
+            for (int i = 0; i < m.Count; i++)
+                marcos[i] = m[i].Equals("Libre");
+            return marcos;
+        }
+
         public int marco { get; set; }
         public string okupa { get; set; }
     }
