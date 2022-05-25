@@ -80,3 +80,6 @@ C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimul
 C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\bin\Debug\Ookii.Dialogs.Wpf.pdb
 C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\bin\Debug\Ookii.Dialogs.Wpf.xml
 C:\Users\camil\OneDrive\Escritorio\Sistemas operacionales\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.csproj.CopyComplete
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\bin\Debug\Ookii.Dialogs.Wpf.dll
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\bin\Debug\Ookii.Dialogs.Wpf.xml
+D:\Leo\Actividades\C#\01-Lab_SO\Lab_SO\PaginationSimulator\PaginationSimulator\obj\Debug\PaginationSimulator.csproj.CopyComplete

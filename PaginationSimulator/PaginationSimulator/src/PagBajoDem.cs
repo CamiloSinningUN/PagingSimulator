@@ -95,9 +95,14 @@ namespace PaginationSimulator.src
                 {
                     marco = marcosUsage.ElementAt(0);
                     TablaPagRow pagVictim = getPageFromMarco(marco);
+                    
                     swapOut = pagVictim.dirty;
+                    pagVictim.valid = pagVictim.dirty = false;
+
+                    printTablePag();
+
                     numReemp++;
-                    Console.WriteLine($"Marco tomado: {marco}, víctima: {pagVictim}");
+                    Console.WriteLine($"Marco tomado: {marco}, víctima: {pagVictim.marco}, swap_out: {swapOut}");
                     if (alg == FIFO)
                         marcosUsage.RemoveFirst();
                 }
@@ -149,7 +154,11 @@ namespace PaginationSimulator.src
 
         private TablaPagRow getPageFromMarco(int marco)
         {
-            for (int i = 0; i < tablaPag.Count; i++) if (tablaPag[i].marco == marco) return tablaPag[i];
+            for (int i = 0; i < tablaPag.Count; i++) if (tablaPag[i].valid && tablaPag[i].marco == marco)
+                {
+                    Console.WriteLine($"*******************{i}");
+                    return tablaPag[i];
+                }
             return null;
         }
         public void printMarcos()
