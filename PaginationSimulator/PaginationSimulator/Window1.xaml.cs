@@ -21,14 +21,19 @@ namespace PaginationSimulator
 
     public partial class Window1 : Window
     {
+        public static readonly int BASE_INSTRUCTION_TIME = 1000;
+        public static readonly float[] SPEED_OPTIONS = { 0.5f, 1.0f, 1.5f, 2.0f, 4.0f };
+
         MainWindow mw;
-        public PagBajoDem sim;
+        PagBajoDem sim;
         Thread t;
+        byte speedIndex;
         Instruc[] instruc;
         ManualResetEvent mrse;
         ObservableCollection<InstRow> instList;
         ObservableCollection<MemRow> memList;
         ObservableCollection<PagRow> pagList;
+        ObservableCollection<OutputCol> outputList;
 
         public Window1(MainWindow mw, PagBajoDem sim)
         {
@@ -36,10 +41,12 @@ namespace PaginationSimulator
 
             this.mw = mw;
             this.sim = sim;
+            speedIndex = 1;
 
             instList = new ObservableCollection<InstRow>();
             memList = new ObservableCollection<MemRow>();
             pagList = new ObservableCollection<PagRow>();
+            outputList= new ObservableCollection<OutputCol>();
             mrse = new ManualResetEvent(initialState: true);
 
             this.Closing += new CancelEventHandler(Window1_Closing);
@@ -51,6 +58,9 @@ namespace PaginationSimulator
             initMP();
             initMS();
             initTablaPag();
+            initOutput();
+
+            updateSpeedLabel();
         }
 
         private void initInst()
@@ -91,6 +101,11 @@ namespace PaginationSimulator
             pageTableDG.ItemsSource = pagList;
         }
 
+        private void initOutput()
+        {
+            OutputDG.ItemsSource = outputList;
+        }
+
         private void updateTablaPag()
         {
             for(int i = 0; i < sim.tablaPag.Length; i++)
@@ -110,19 +125,42 @@ namespace PaginationSimulator
             memDG.ItemsSource = memList;
         }
 
+        private void updateOutput(InstOutput o)
+        {
+            outputList.Add(OutputCol.Parse(o));
+            OutputDG.ItemsSource = null;
+            OutputDG.ItemsSource = outputList;
+        }
+
+        private void resetOutput()
+        {
+            outputList = new ObservableCollection<OutputCol>();
+            OutputDG.ItemsSource = null;
+            OutputDG.ItemsSource = outputList;
+        }
+
+        private void updateSpeedLabel()
+        {
+            SpeedLabel.Text = $"x{SPEED_OPTIONS[speedIndex]}";
+        }
+
         private void Run()
         {
             for (int i = 0; i < instruc.Length; i++)
             {
-                Thread.Sleep(3000);
+                Console.WriteLine("*************************************");
+                Console.WriteLine((int)(BASE_INSTRUCTION_TIME / SPEED_OPTIONS[speedIndex]));
+                Console.WriteLine("*************************************");
+                Thread.Sleep((int)(BASE_INSTRUCTION_TIME / SPEED_OPTIONS[speedIndex]));
                 mrse.WaitOne();
                 Console.WriteLine("New instruction...");
-                sim.ExInstruc(instruc[i], i);
+                InstOutput output = sim.ExInstruc(instruc[i], i);
                 
                 this.Dispatcher.Invoke(() =>
                 {
                     updateTablaPag();
                     updateMem();
+                    updateOutput(output);
                 });
             }
             Console.WriteLine("All done!");
@@ -141,6 +179,7 @@ namespace PaginationSimulator
 
             updateTablaPag();
             updateMem();
+            resetOutput();
 
             //sim.InitMarcos(genMarcosInit(sim.numMarcos));
             sim.InitMarcos(MemRow.parse(memList));
@@ -404,6 +443,23 @@ namespace PaginationSimulator
             }
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (speedIndex > 0) speedIndex--;
+            updateSpeedLabel();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (speedIndex < SPEED_OPTIONS.Length - 1 ) speedIndex++;
+            updateSpeedLabel();
+        }
+
+        private void OutputDG_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 
     public class InstRow
@@ -478,15 +534,6 @@ namespace PaginationSimulator
     {
         public PagRow() { }
 
-        public PagRow(int index, string marco, byte valid, byte dirty, string time)
-        {
-            this.index = index;
-            this.marco = marco;
-            this.valid = valid;
-            this.dirty= dirty;
-            this.time = time;
-        }
-
         public void FromPag(Pag pag)
         {
             this.valid = (byte)(pag.valid ? 1 : 0);
@@ -501,5 +548,34 @@ namespace PaginationSimulator
         public byte valid { get; set; }
         public byte dirty { get; set; }
         public string time { get; set; }
+    }
+
+    public class OutputCol
+    {
+       
+        public OutputCol(int dirLog, int dirFis, string lec, int pag, int marco, byte swapIn, byte swapOut)
+        {
+            this.lec = lec;
+            this.dirLog = dirLog;
+            this.dirFis = dirFis;
+            this.pag = pag;
+            this.marco = marco;
+            this.swapIn = swapIn;
+            this.swapOut = swapOut;
+        }
+
+        public static OutputCol Parse(InstOutput o)
+        {
+            return new OutputCol(o.dirLog, o.dirFis, (o.lec ? "L" : "E"), o.pag, o.marco, (byte)(o.swapIn ? 1 : 0), 
+                (byte)(o.swapOut ? 1 : 0));
+        }
+
+        public string lec { get; set; }
+        public int dirLog {get;set;}
+        public int dirFis {get;set;}
+        public int pag {get;set;}
+        public int marco {get;set;}
+        public byte swapIn {get;set;}
+        public byte swapOut {get;set;}
     }
 }

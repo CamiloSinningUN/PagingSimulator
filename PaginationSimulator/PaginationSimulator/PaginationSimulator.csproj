@@ -70,7 +70,7 @@
     </Compile>
     <Compile Include="src\Instruc.cs" />
     <Compile Include="src\PagBajoDem.cs" />
-    <Compile Include="src\Salida.cs" />
+    <Compile Include="src\InstOutput.cs" />
     <Compile Include="src\Pag.cs" />
     <Compile Include="tables\tempSim.cs" />
     <Compile Include="Window1.xaml.cs">

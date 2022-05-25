@@ -81,7 +81,7 @@ namespace PaginationSimulator.src
                 marcos[i] = marcosInit[i] ? MARCO_FREE : MARCO_OCCUP_PREV;
         }
 
-        public void ExInstruc(Instruc instruc, int time)
+        public InstOutput ExInstruc(Instruc instruc, int time)
         {
             Console.WriteLine($"instruc: (dir={instruc.dir}, lec={instruc.lec})");
             int pag = instruc.dir / tamMarco;
@@ -137,6 +137,8 @@ namespace PaginationSimulator.src
             Console.WriteLine("");
             printTablePag();
             printMarcosUsage();
+
+            return new InstOutput(instruc.dir, dirFis, instruc.lec, pag, marco, swapIn, swapOut, "");
         }
 
         private int findMarcoLibre()

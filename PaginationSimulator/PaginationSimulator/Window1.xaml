@@ -442,7 +442,7 @@
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
                         <Border BorderBrush="Black" BorderThickness="1" Height="60" Width="70" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0" Background="#FFF3F3F3">
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Height="60" BorderBrush="{x:Null}" Margin="0" >
+                            <Button Click="Button_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Height="60" BorderBrush="{x:Null}" Margin="0" >
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
                                         <Setter Property="Background" Value="Green"/>
@@ -474,12 +474,11 @@
                         </Border>
 
                         <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Grid.Column="1" Margin="0,0,0,0">
-                            <TextBox Margin="0" TextWrapping="Wrap" Text="X10" FontFamily="Fugaz one" FontSize="30" Foreground="#B5000000" BorderBrush="#00000000" SelectionBrush="{x:Null}" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="False"/>
+                            <TextBox x:Name="SpeedLabel" Margin="0" TextWrapping="Wrap" Text="x1" FontFamily="Fugaz one" FontSize="30" Foreground="#B5000000" BorderBrush="#00000000" SelectionBrush="{x:Null}" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="False"/>
                         </Border>
 
-
                         <Border BorderBrush="Black" BorderThickness="1" Height="60" Width="70" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="10,0,0,0" Background="#FFF3F3F3">
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Height="60" BorderBrush="{x:Null}" >
+                            <Button Click="Button_Click_1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Height="60" BorderBrush="{x:Null}" >
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
                                         <Setter Property="Background" Value="Green"/>
@@ -584,12 +583,24 @@
                 <ScrollViewer Name="c_dataGridScrollViewer"
               VerticalScrollBarVisibility="Auto"
               HorizontalScrollBarVisibility="Auto">
-                    <DataGrid x:Name="DG2" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Left" Background="#FFB9B9B9" BorderBrush="#FFE0E0E0" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="30,0" Padding="0" Foreground="Black" >
+                    <DataGrid x:Name="OutputDG" MinRowHeight="50" IsEnabled="False" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Left" Background="#FFB9B9B9" BorderBrush="#FFE0E0E0" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" Margin="30,0" Padding="0" Foreground="Black" SelectionChanged="OutputDG_SelectionChanged" >
                         <DataGrid.LayoutTransform>
                             <TransformGroup>
                                 <RotateTransform Angle="-90"/>
                             </TransformGroup>
                         </DataGrid.LayoutTransform>
+                        <DataGrid.CellStyle>
+                            <Style  TargetType="DataGridCell">
+                                <Setter Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <TransformGroup>
+                                            <RotateTransform Angle="90"/>
+                                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                                        </TransformGroup>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGrid.CellStyle>
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="LayoutTransform">
@@ -602,13 +613,13 @@
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Swap out"/>
-                            <DataGridTextColumn Header="Swap in"/>
-                            <DataGridTextColumn Header="Dir fisica"/>
-                            <DataGridTextColumn Header="Núm. Marc."/>
-                            <DataGridTextColumn Header="Núm. Pag." Binding="{Binding NumPag}"/>
-                            <DataGridTextColumn Header="Lect/Escri" Binding="{Binding LastName}" />
-                            <DataGridTextColumn Header="Dir Lógica"  Binding="{Binding FirstName}" />
+                            <DataGridTextColumn Header="Swap out" Binding="{Binding swapOut}"/>
+                            <DataGridTextColumn Header="Swap in" Binding="{Binding swapIn}"/>
+                            <DataGridTextColumn Header="Dir fisica" Binding="{Binding dirFis}"/>
+                            <DataGridTextColumn Header="Núm. Marc." Binding="{Binding marco}"/>
+                            <DataGridTextColumn Header="Núm. Pag." Binding="{Binding pag}"/>
+                            <DataGridTextColumn Header="Lect/Escri" Binding="{Binding lec}" />
+                            <DataGridTextColumn Header="Dir Lógica"  Binding="{Binding dirLog}" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>
