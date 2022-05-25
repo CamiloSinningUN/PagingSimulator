@@ -135,6 +135,7 @@ namespace PaginationSimulator.src
             printTablePag();
             printMarcosUsage();
         }
+
         private int findMarcoLibre()
         {
             if (allMarcosLlenos) return -1;
@@ -182,6 +183,20 @@ namespace PaginationSimulator.src
             return temp;
         }
 
+        public void Clear()
+        {
+            this.numFallosPag = 0;
+            this.numReemp = 0;
+            this.marcos = new byte[numMarcos];
+            this.tablaPag = new ObservableCollection<TablaPagRow>(new List<TablaPagRow>(numPagProc));
+            initTablaPag();
+            this.marcosUsage = new LinkedList<int>();
+            this.allMarcosLlenos = false;
+        }
+    }
+
+    public partial class PagBajoDem
+    {
         public class PagBajoDemException : Exception
         {
             public PagBajoDemException(string Message, byte Type) : base(Message)
@@ -199,12 +214,7 @@ namespace PaginationSimulator.src
             public const byte MARCO_EXCEPTION = 5;
             public const byte SO_AND_PROC_EXCEPTION = 6;
             public const byte NUM_MARCOS_EXCEPTION = 7;
-
         }
-    }
-
-    public partial class PagBajoDem
-    {
         // public const int MAX_TAM_MARCO = 8192;
         // public const int MIN_TAM_MARCO = 0; //512
         public byte alg { get; set; }

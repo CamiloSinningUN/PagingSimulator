@@ -352,10 +352,10 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Lect/Ecri">
+                                <DataGridTemplateColumn Header="Lect/Esc">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding lec}" PreviewMouseDown="lect_PreviewMouseDown" IsReadOnly="True"/>
+                                            <TextBox Text="{Binding lec}" MouseDoubleClick="TextBox_MouseDoubleClick" IsReadOnly="True"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -649,7 +649,7 @@
                             <DataGridTemplateColumn Header="Estado">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding okupa}" IsReadOnly="True" PreviewMouseDown="mem_PreviewMouseDown"/>
+                                        <TextBox Text="{Binding okupa}" IsReadOnly="True" MouseDoubleClick="TextBox_MouseDoubleClick_1"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

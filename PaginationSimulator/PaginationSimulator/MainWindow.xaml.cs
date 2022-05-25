@@ -89,7 +89,7 @@ namespace PaginationSimulator
             {
                 PagBajoDem sim = new PagBajoDem(tamPageVal, tamProVal, tamSOVal, tamMemVal);
 
-                Window1 subWindow = new Window1(sim);
+                Window1 subWindow = new Window1(this, sim);
                 subWindow.Show();
                 this.Hide();
             }
