@@ -2,22 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Threading;
 using PaginationSimulator.tables;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
+using System.IO;
+using System.Drawing;
 
 namespace PaginationSimulator
 {
@@ -62,6 +55,7 @@ namespace PaginationSimulator
                 x++;
             }
             memDG.ItemsSource = memList;
+
             // Secondary memory table
             // Generate aleatory positions
             List<MemSec> tempSec = new List<MemSec>();
@@ -255,6 +249,135 @@ namespace PaginationSimulator
         private static bool IsKeyADigit(Key key)
         {
             return (key >= Key.D0 && key <= Key.D9) || (key >= Key.NumPad0 && key <= Key.NumPad9);
+        }
+
+        private void readCSVInst_Click(object sender, RoutedEventArgs e)
+        {
+            // erase previous list
+            instList.Clear();
+
+            // read csv and save it into observable list
+            //selectt path
+            var dialog = new Ookii.Dialogs.Wpf.VistaOpenFileDialog();
+            if (dialog.ShowDialog(this).GetValueOrDefault())
+            {
+                string path = dialog.FileName;
+                StreamReader reader = null;
+                try
+                {
+                    reader = new StreamReader($@"{path}");
+                }
+                catch
+                {
+                    using (var dialog_error = new Ookii.Dialogs.Wpf.TaskDialog())
+                    {
+                        dialog_error.WindowTitle = "Error de lectura";
+                        dialog_error.Content = "Error inesperado, verifique que el archivo no se esté usando por otro programa.";
+
+                        var continueButton = new Ookii.Dialogs.Wpf.TaskDialogButton("Continue");
+                        dialog_error.CustomMainIcon = SystemIcons.Warning;
+                        dialog_error.Buttons.Add(continueButton);
+
+                        Ookii.Dialogs.Wpf.TaskDialogButton button = dialog_error.ShowDialog();
+                        //if (button == continueButton)
+                        return;
+                    }
+                }
+                
+
+                //read from path    
+                List<int> listDir = new List<int>();
+                List<string> listLect = new List<string>();
+                for (int i = 0; i < 2; i++)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(',');
+                    if(i == 0)
+                    {
+                        // add logic dir
+                        foreach (string item in values)
+                        {   
+                            if((int.Parse(item)) < sim.tamProc){
+                                listDir.Add(int.Parse(item));
+                            }
+                            else
+                            {
+                                //error dialog
+                                using (var dialog_error = new Ookii.Dialogs.Wpf.TaskDialog())
+                                {
+                                    dialog_error.WindowTitle = "Error de lectura";
+                                    dialog_error.Content = "Una de las direcciones ingresadas no es valida para la configuración usada, por favor cambie la configuración de la simulación o cambie las instrucciones.";
+
+                                    var continueButton = new Ookii.Dialogs.Wpf.TaskDialogButton("Continue");
+                                    dialog_error.CustomMainIcon = SystemIcons.Warning;
+                                    dialog_error.Buttons.Add(continueButton);
+
+                                    Ookii.Dialogs.Wpf.TaskDialogButton button = dialog_error.ShowDialog();
+                                    //if (button == continueButton)
+                                    return; 
+                                }
+                            }
+ 
+                        }
+                    }
+                    else if (i == 1)
+                    {
+                        // add type of intruction
+                        foreach (string item in values)
+                        {
+                            if(item == "L" || item == "E")
+                            {
+                                listLect.Add(item);
+                            }
+                            else
+                            {
+                                //error dialog
+                                using (var dialog_error = new Ookii.Dialogs.Wpf.TaskDialog())
+                                {
+                                    dialog_error.WindowTitle = "Error de lectura";
+                                    dialog_error.Content = "Existe un error en el formato de la fila usada para determinar si es lectura o escritura.";
+
+                                    var continueButton = new Ookii.Dialogs.Wpf.TaskDialogButton("Continue");
+                                    dialog_error.CustomMainIcon = SystemIcons.Warning;
+                                    dialog_error.Buttons.Add(continueButton);
+
+                                    Ookii.Dialogs.Wpf.TaskDialogButton button = dialog_error.ShowDialog();
+                                    //if (button == continueButton)
+                                    return;
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+                if(listLect.Count != listDir.Count)
+                {
+                    //error dialog
+                    using (var dialog_error = new Ookii.Dialogs.Wpf.TaskDialog())
+                    {
+                        dialog_error.WindowTitle = "Error de lectura";
+                        dialog_error.Content = "El número de direccíones difiere del número de indicaciones de lectura y escritura";
+
+                        var continueButton = new Ookii.Dialogs.Wpf.TaskDialogButton("Continue");
+                        dialog_error.CustomMainIcon = SystemIcons.Warning;
+                        dialog_error.Buttons.Add(continueButton);
+
+                        Ookii.Dialogs.Wpf.TaskDialogButton button = dialog_error.ShowDialog();
+                        //if (button == continueButton)
+                        return;
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < listDir.Count; i++)
+                    {
+                        ParseInst tempInst = new ParseInst(listDir[i], listLect[i]);
+                        instList.Add(tempInst);
+                    }
+                }
+                
+            }   
+
         }
 
 
