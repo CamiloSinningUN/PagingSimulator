@@ -84,22 +84,22 @@ namespace PaginationSimulator.src
         public InstOutput ExInstruc(Instruc instruc, int time)
         {
             string bit = "";
-            bit += $"Dirección = {instruc.dir}, {(instruc.lec ? "lectura" : "escritura")}"+Environment.NewLine+ "--------------------------------"+Environment.NewLine;
+            bit += $"Dirección = {instruc.dir}, {(instruc.lec ? "lectura" : "escritura")}" + Environment.NewLine + "--------------------------------" + Environment.NewLine;
             int pag = instruc.dir / tamMarco;
             int marco = tablaPag[pag].marco;
             Console.WriteLine(marco);
             bool swapIn, swapOut;
-            if (marco == -1)
+            if (!tablaPag[pag].valid)
             {
-                bit += "Fallo de página"+Environment.NewLine;
+                bit += "Fallo de página" + Environment.NewLine;
                 marco = findMarcoLibre();
                 if (marco == -1)
                 {
                     bit += "No se encontró marco libre" + Environment.NewLine;
                     marco = marcosUsage.ElementAt(0);
                     Pag pagVictim = getPageFromMarco(marco);
-                    
-                    swapOut = pagVictim.dirty;                   
+
+                    swapOut = pagVictim.dirty;
                     pagVictim.valid = pagVictim.dirty = false;
 
                     numReemp++;
@@ -113,7 +113,7 @@ namespace PaginationSimulator.src
                     swapOut = false;
                 }
                 tablaPag[pag].marco = marco;
-                tablaPag[pag].dirty = !instruc.lec;
+
                 tablaPag[pag].valid = true;
                 tablaPag[pag].time = time + 1;
 
@@ -121,7 +121,7 @@ namespace PaginationSimulator.src
                 numFallosPag++;
                 marcos[marco] = MARCO_CON_PAG;
 
-                if(alg == FIFO)
+                if (alg == FIFO)
                     marcosUsage.AddLast(marco);
             }
             else
@@ -130,11 +130,14 @@ namespace PaginationSimulator.src
                 bit += $"No hubo fallo de página: marco = {marco}" + Environment.NewLine;
             }
 
-            if(alg == LRU)
+            if (alg == LRU)
             {
                 marcosUsage.Remove(marco);
                 marcosUsage.AddLast(marco);
             }
+
+            if (!instruc.lec) tablaPag[pag].dirty = true;
+
             int dirFis = marco * tamMarco + (instruc.dir % tamMarco);
             bit += $"Resumen: \n página = {pag} \n marco = {marco} \n dirección física = {dirFis} \n swap in = {swapIn} \n swap out = {swapOut}" + Environment.NewLine;
             bit += Environment.NewLine;
