@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,13 @@ namespace PaginationSimulator
     /// </summary>
     public partial class PopUpFinish : Window
     {
-        public PopUpFinish()
+        string bitacora;
+        public PopUpFinish(string reemps, string fallos, string bitac)
         {
             InitializeComponent();
+            reempText.Text = reemps;
+            fallText.Text = fallos;
+            bitacora = bitac;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -29,9 +34,28 @@ namespace PaginationSimulator
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void salir_Click(object sender, RoutedEventArgs e)
         {
+            this.Close();
+        }
 
+        private void guardar_Click(object sender, RoutedEventArgs e)
+        {
+            //pedir path para generar txt
+            var dialog = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
+            dialog.ShowDialog();
+            Console.WriteLine(dialog.SelectedPath);
+            try
+            {
+                StreamWriter file = new StreamWriter(dialog.SelectedPath + "\\Bitacora.txt");
+                file.Write(bitacora);
+                this.Close();
+            }
+            catch
+            {
+
+            }
+            
         }
     }
 }

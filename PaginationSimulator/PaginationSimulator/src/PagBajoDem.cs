@@ -83,16 +83,19 @@ namespace PaginationSimulator.src
 
         public InstOutput ExInstruc(Instruc instruc, int time)
         {
-            Console.WriteLine($"instruc: (dir={instruc.dir}, lec={instruc.lec})");
+            string bit = "";
+            bit += $"Dirección = {instruc.dir}, {(instruc.lec ? "lectura" : "escritura")}"+Environment.NewLine+ "--------------------------------"+Environment.NewLine;
             int pag = instruc.dir / tamMarco;
             int marco = tablaPag[pag].marco;
             Console.WriteLine(marco);
             bool swapIn, swapOut;
             if (marco == -1)
             {
+                bit += "Fallo de página"+Environment.NewLine;
                 marco = findMarcoLibre();
                 if (marco == -1)
                 {
+                    bit += "No se encontró marco libre" + Environment.NewLine;
                     marco = marcosUsage.ElementAt(0);
                     Pag pagVictim = getPageFromMarco(marco);
                     
@@ -100,13 +103,13 @@ namespace PaginationSimulator.src
                     pagVictim.valid = pagVictim.dirty = false;
 
                     numReemp++;
-                    Console.WriteLine($"Marco tomado: {marco}, víctima: {pagVictim.marco}, swap_out: {swapOut}");
+                    bit += $"Marco tomado: {marco}, página víctima: {pagVictim.index}, swap out: {swapOut}" + Environment.NewLine;
                     if (alg == FIFO)
                         marcosUsage.RemoveFirst();
                 }
                 else
                 {
-                    Console.WriteLine($"Marco libre: {marco}");
+                    bit += $"Marco libre tomado = {marco}" + Environment.NewLine;
                     swapOut = false;
                 }
                 tablaPag[pag].marco = marco;
@@ -124,7 +127,7 @@ namespace PaginationSimulator.src
             else
             {
                 swapIn = swapOut = false;
-                Console.WriteLine($"No fallo de pag: marco={marco}");
+                bit += $"No hubo fallo de página: marco = {marco}" + Environment.NewLine;
             }
 
             if(alg == LRU)
@@ -133,12 +136,12 @@ namespace PaginationSimulator.src
                 marcosUsage.AddLast(marco);
             }
             int dirFis = marco * tamMarco + instruc.dir % tamProc;
-            Console.WriteLine($"pag={pag}, marco={marco}, dirFis={dirFis}, swapIn={swapIn}, swapOut={swapOut}");
-            Console.WriteLine("");
-            printTablePag();
+            bit += $"Resumen: \n página = {pag} \n marco = {marco} \n dirección física = {dirFis} \n swap in = {swapIn} \n swap out = {swapOut}" + Environment.NewLine;
+            bit += Environment.NewLine;
+            bit += printTablePag();
             printMarcosUsage();
 
-            return new InstOutput(instruc.dir, dirFis, instruc.lec, pag, marco, swapIn, swapOut, "");
+            return new InstOutput(instruc.dir, dirFis, instruc.lec, pag, marco, swapIn, swapOut, bit);
         }
 
         private int findMarcoLibre()
@@ -174,12 +177,17 @@ namespace PaginationSimulator.src
             Console.WriteLine("");
         }
 
-        public void printTablePag()
+        public string printTablePag()
         {
-            Console.WriteLine("TablaPag:");
+            string bit = "";
+            bit += "TABLA DE PÁGINAS:"+Environment.NewLine;
+            bit += "MARCO\tVALID\tDIRTY"+Environment.NewLine;
+            bit += "------\t------\t------" + Environment.NewLine;
             foreach (Pag p in tablaPag)
-                Console.WriteLine($"marco={p.marco}, valid={p.valid}, dirty={p.dirty}");
-            Console.WriteLine("");
+                
+                bit += $"{(p.marco==-1 ? "-" : p.marco+"")}\t{(p.valid ? "1" : "0")}\t{(p.dirty ? "1" : "0")}"+Environment.NewLine;
+            bit += "";
+            return bit;
         }
 
         public ObservableCollection<Pag> getTablePag()

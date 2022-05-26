@@ -34,6 +34,7 @@ namespace PaginationSimulator
         ObservableCollection<MemRow> memList;
         ObservableCollection<PagRow> pagList;
         ObservableCollection<OutputCol> outputList;
+        bool running = false;
 
         public Window1(MainWindow mw, PagBajoDem sim)
         {
@@ -61,6 +62,7 @@ namespace PaginationSimulator
             initOutput();
 
             updateSpeedLabel();
+            
         }
 
         private void initInst()
@@ -83,10 +85,28 @@ namespace PaginationSimulator
         private void initMS()
         {
             // Secondary memory table
-            // Generate aleatory positions
             List<MemRowSec> tempSec = new List<MemRowSec>();
+            List<int> ints = new List<int>();
+
+            // Generate aleatory positions
+            //generate an aleatory number to add
+            Random rd = new Random();
             for (int i = 0; i < sim.numPagProc; i++)
-                tempSec.Add(new MemRowSec(i));
+            {
+                int rand_num = 0;
+                do
+                {
+                    rand_num = rd.Next(0, sim.numPagProc);
+                } while (ints.IndexOf(rand_num) != -1);
+                
+                    ints.Add(rand_num);
+                    tempSec.Add(new MemRowSec(rand_num));
+            }
+
+
+            //List<MemRowSec> tempSec = new List<MemRowSec>();
+            //for (int i = 0; i < sim.numPagProc; i++)
+            //    tempSec.Add(new MemRowSec(i));
             secDG.ItemsSource = tempSec;
         }
 
@@ -148,34 +168,41 @@ namespace PaginationSimulator
         {
             for (int i = 0; i < instruc.Length; i++)
             {
-                Console.WriteLine("*************************************");
-                Console.WriteLine((int)(BASE_INSTRUCTION_TIME / SPEED_OPTIONS[speedIndex]));
-                Console.WriteLine("*************************************");
+                this.Dispatcher.Invoke(() => {
+                    addOnBitacora("--------INSTRUCCIÓN--------");
+                });
                 Thread.Sleep((int)(BASE_INSTRUCTION_TIME / SPEED_OPTIONS[speedIndex]));
                 mrse.WaitOne();
-                Console.WriteLine("New instruction...");
-                InstOutput output = sim.ExInstruc(instruc[i], i);
                 
+                InstOutput output = sim.ExInstruc(instruc[i], i);
+                    
                 this.Dispatcher.Invoke(() =>
                 {
+                    addOnBitacora(output.bitac);
                     updateTablaPag();
                     updateMem();
                     updateOutput(output);
                 });
             }
-            Console.WriteLine("All done!");
+            this.Dispatcher.Invoke(() => addOnBitacora("¡Terminado!"));
             this.Dispatcher.Invoke(() => resetSimul());
+            instStack.Visibility = Visibility.Visible;
+
 
         }
 
         private void play_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("PLAY");
+            bitacoraText.Text = "";
+            this.Dispatcher.Invoke(() => addOnBitacora("Inicio"));
 
             play.Visibility = Visibility.Hidden;
             method.Visibility = Visibility.Hidden;
             pause.Visibility = Visibility.Visible;
             Reset.Visibility = Visibility.Visible;
+            instStack.Visibility = Visibility.Hidden;
+            running = true;
+
 
             updateTablaPag();
             updateMem();
@@ -201,12 +228,17 @@ namespace PaginationSimulator
 
         private void resetSimul()
         {
-            Console.WriteLine("RESET");
             play.Visibility = Visibility.Visible;
             method.Visibility = Visibility.Visible;
             pause.Visibility = Visibility.Hidden;
             Reset.Visibility = Visibility.Hidden;
             resume.Visibility = Visibility.Hidden;
+            instStack.Visibility = Visibility.Visible;
+            running = false;
+
+            PopUpFinish finishWin = new PopUpFinish(sim.numReemp + "", sim.numFallosPag + "", bitacoraText.Text);
+            finishWin.ShowDialog();
+            //this.Hide();
 
             mrse.Reset();
             try
@@ -223,7 +255,6 @@ namespace PaginationSimulator
 
         private void pause_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("PAUSE");
             resume.Visibility = Visibility.Visible;
             pause.Visibility = Visibility.Hidden;
             mrse.Reset();
@@ -231,7 +262,6 @@ namespace PaginationSimulator
 
         private void resume_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("RESUME");
             pause.Visibility = Visibility.Visible;
             resume.Visibility = Visibility.Hidden;
             mrse.Set();
@@ -303,6 +333,7 @@ namespace PaginationSimulator
 
         private void TextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if (running) return;
             TextBox temp = (TextBox)sender;
             temp.Text = temp.Text == "L" ? "E" : "L";
             instList[InstDG.SelectedIndex].lec = temp.Text;
@@ -310,6 +341,7 @@ namespace PaginationSimulator
 
         private void TextBox_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
+            if(running) return;
             TextBox temp = (TextBox)sender;
             if (temp.Text == "SO") return;
             temp.Text = temp.Text == "Libre" ? "Ocupado" : "Libre";
@@ -460,6 +492,18 @@ namespace PaginationSimulator
         {
 
         }
+
+        private void deleteInst_Click(object sender, RoutedEventArgs e)
+        {   
+            if(instList.Count>0)
+                instList.RemoveAt(instList.Count - 1);
+        }
+
+        public void addOnBitacora(string text)
+        {
+            bitacoraText.Text = bitacoraText.Text + Environment.NewLine + text;
+        }
+
     }
 
     public class InstRow
@@ -520,6 +564,7 @@ namespace PaginationSimulator
         public int marco { get; set; }
         public string okupa { get; set; }
     }
+
     public class MemRowSec
     {
         public MemRowSec(int num)

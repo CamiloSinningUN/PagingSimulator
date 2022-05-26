@@ -154,5 +154,8 @@
   <ItemGroup>
     <Resource Include="assets\CSV.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\Subtract.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,7 +8,7 @@
         xmlns:space="clr-namespace:PaginationSimulator.tables"
         xmlns:sys ="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Window1" Height="768" Width="1366" >
+        Title="Simulador de paginación" Height="768" Width="1366" WindowState="Maximized">
     <Window.Resources>
         <Image x:Key="Play" Source="assets/Play.png"  Width="40" Height="40"/>
         <Image x:Key="Pause" Source="assets/Pause.png"  Width="40" Height="40"/>
@@ -361,8 +361,8 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </ScrollViewer>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
-                        <Border BorderThickness="1" CornerRadius="10,10,10,10"  Background="#FFC4C4C4" Height="40" Width="240">
+                    <StackPanel x:Name="instStack" Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+                        <Border BorderThickness="1" CornerRadius="10,10,10,10"  Background="#FFC4C4C4" Height="40" Width="100">
                             <Button x:Name="addInst" BorderBrush="{x:Null}" Click="addInst_Click" >
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
@@ -381,6 +381,37 @@
                                 </Button.Style>
                                 <Button.Background>
                                     <ImageBrush ImageSource="assets/Plus Math.png" Stretch="None">
+                                        <ImageBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.75" ScaleY="0.75"/>
+                                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                                <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </ImageBrush.RelativeTransform>
+                                    </ImageBrush>
+                                </Button.Background>
+                            </Button>
+                        </Border>
+                        <Border BorderThickness="1" CornerRadius="10,10,10,10"  Background="#FFC4C4C4" Height="40" Width="100">
+                            <Button x:Name="deleteInst" BorderBrush="{x:Null}" Click="deleteInst_Click">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="Green"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+
+                                    </Style>
+                                </Button.Style>
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/assets/Subtract.png" Stretch="None">
                                         <ImageBrush.RelativeTransform>
                                             <TransformGroup>
                                                 <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.75" ScaleY="0.75"/>
@@ -430,9 +461,11 @@
                     <!--#table -->
                     <!---->
                     <Border BorderBrush="Black" BorderThickness="1" Height="1" Margin="10,0" VerticalAlignment="Top"/>
-                    <Label Content="Bitacora" HorizontalAlignment="Center"  VerticalAlignment="Center" RenderTransformOrigin="0.987,2.404" Foreground="#FF3A0CA3" FontSize="30" FontFamily="Fugaz one"/>
+                    <Label Content="Bitácora" HorizontalAlignment="Center"  VerticalAlignment="Center" RenderTransformOrigin="0.987,2.404" Foreground="#FF3A0CA3" FontSize="30" FontFamily="Fugaz one"/>
                     <Border BorderBrush="Black" BorderThickness="1" Height="200" Margin="20,0,18,0" CornerRadius="10">
-                        <TextBlock  TextWrapping="Wrap" Foreground="#C9000000" FontFamily="Fugaz one" FontSize="20" ScrollViewer.CanContentScroll="True" IsEnabled="False"/>
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <TextBlock x:Name="bitacoraText"  TextWrapping="Wrap" Foreground="#C9000000" FontFamily="Fugaz one" FontSize="15" ScrollViewer.CanContentScroll="True" IsEnabled="False" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Padding="5,5,5,5"/>
+                        </ScrollViewer>
                     </Border>
                     <Label Content="Velocidad" HorizontalAlignment="Center"  VerticalAlignment="Center" RenderTransformOrigin="0.987,2.404" Foreground="Black" FontSize="30" FontFamily="Fugaz one" Margin="0,10,0,0"/>
                     <Grid Height="60">
@@ -717,7 +750,7 @@
                 </ScrollViewer>
                 <Label Content="Tabla de páginas" FontFamily="Fugaz one" FontSize="30" Margin="0" HorizontalContentAlignment="Center" Grid.Row="1"/>
                 <ScrollViewer Grid.RowSpan="2" Grid.Row="1" Margin="0,50,0,0" HorizontalAlignment="Center">
-                    <DataGrid x:Name="pageTableDG" ItemsSource="{Binding}" AutoGenerateColumns="False" Background="#FFB9B9B9" BorderBrush="#FFE0E0E0" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="0" Foreground="Black" HorizontalAlignment="Center" >
+                    <DataGrid x:Name="pageTableDG" ItemsSource="{Binding}" CanUserAddRows="False" AutoGenerateColumns="False" Background="#FFB9B9B9" BorderBrush="#FFE0E0E0" FontFamily="Fugaz one" FontSize="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="0" Foreground="Black" HorizontalAlignment="Center" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Indice" Binding="{Binding index}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Marco" Binding="{Binding marco}" IsReadOnly="True"/>

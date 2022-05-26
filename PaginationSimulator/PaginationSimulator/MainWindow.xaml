@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PaginationSimulator"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="PaginationSimulator.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="768" Width="1366" >
+        Title="Simulador de paginación" Height="768" Width="1366" WindowState="Maximized">
     <Window.Resources>
 
         <Style x:Key="FocusVisual">

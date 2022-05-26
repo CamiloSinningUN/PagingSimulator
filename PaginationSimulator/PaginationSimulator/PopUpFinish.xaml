@@ -5,17 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PaginationSimulator"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="PopUpFinish" Height="360" Width="507" WindowStyle="None" >
     <Grid>
         <StackPanel HorizontalAlignment="Left" Height="342" VerticalAlignment="Top" Width="499">
             <Label Content="Resumen" FontFamily="Fugaz one" FontSize="80" Foreground="#FF3A0CA3" HorizontalContentAlignment="Center" Height="100" VerticalContentAlignment="Center"/>
             <Label Content="Número de reemplazos" FontFamily="Fugaz one" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <TextBox Height="52" TextWrapping="Wrap" Text="50" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Fugaz one" FontSize="20" Background="#FFF3F3F3" Margin="200,0"/>
+            <TextBox x:Name="reempText" IsReadOnly="True" Height="52" TextWrapping="Wrap" Text="50" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Fugaz one" FontSize="20" Background="#FFF3F3F3" Margin="200,0">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
             <Label>
                 <Label Content="Número de Fallos" FontFamily="Fugaz one" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="499"/>
             </Label>
-            <TextBox Height="52" TextWrapping="Wrap" Text="20" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Fugaz one" FontSize="20" Background="#FFF3F3F3" Margin="200,0"/>
-            <Button Content="OK" Click="Button_Click" Height="36" Margin="0,13,0,0" Width="300" Background="#FF4361EE" Foreground="White" FontFamily="Fugaz one" FontSize="20"/>
+            <TextBox x:Name="fallText" Height="52" IsReadOnly="True" TextWrapping="Wrap" Text="20" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Fugaz one" FontSize="20" Background="#FFF3F3F3" Margin="200,0">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="salir" Content="Salir" Height="36" Width="200" Background="#FFFB3640" Foreground="White" FontFamily="Fugaz one" FontSize="20" Margin="0,0,10,0" Click="salir_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="guardar" Content="Guardar"  Height="36" Width="200" Background="#FF4361EE" Foreground="White" FontFamily="Fugaz one" FontSize="20" Click="guardar_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
         </StackPanel>
 
     </Grid>
