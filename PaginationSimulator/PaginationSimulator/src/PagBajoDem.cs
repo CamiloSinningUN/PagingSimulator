@@ -99,7 +99,7 @@ namespace PaginationSimulator.src
                     marco = marcosUsage.ElementAt(0);
                     Pag pagVictim = getPageFromMarco(marco);
                     
-                    swapOut = pagVictim.dirty;
+                    swapOut = pagVictim.dirty;                   
                     pagVictim.valid = pagVictim.dirty = false;
 
                     numReemp++;
@@ -135,7 +135,7 @@ namespace PaginationSimulator.src
                 marcosUsage.Remove(marco);
                 marcosUsage.AddLast(marco);
             }
-            int dirFis = marco * tamMarco + instruc.dir % tamProc;
+            int dirFis = marco * tamMarco + (instruc.dir % tamMarco);
             bit += $"Resumen: \n página = {pag} \n marco = {marco} \n dirección física = {dirFis} \n swap in = {swapIn} \n swap out = {swapOut}" + Environment.NewLine;
             bit += Environment.NewLine;
             bit += printTablePag();

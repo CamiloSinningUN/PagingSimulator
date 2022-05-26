@@ -193,32 +193,59 @@ namespace PaginationSimulator
 
         private void play_Click(object sender, RoutedEventArgs e)
         {
-            bitacoraText.Text = "";
-            this.Dispatcher.Invoke(() => addOnBitacora("Inicio"));
+            bool libre = false;
+            foreach (MemRow item in memList)
+            {
+                if (item.okupa != "Ocupado") libre = true;
+            }
 
-            play.Visibility = Visibility.Hidden;
-            method.Visibility = Visibility.Hidden;
-            pause.Visibility = Visibility.Visible;
-            Reset.Visibility = Visibility.Visible;
-            instStack.Visibility = Visibility.Hidden;
-            running = true;
+            if (libre)
+            {
+                bitacoraText.Text = "";
+                this.Dispatcher.Invoke(() => addOnBitacora("Inicio"));
+
+                play.Visibility = Visibility.Hidden;
+                method.Visibility = Visibility.Hidden;
+                pause.Visibility = Visibility.Visible;
+                Reset.Visibility = Visibility.Visible;
+                instStack.Visibility = Visibility.Hidden;
+                running = true;
 
 
-            updateTablaPag();
-            updateMem();
-            resetOutput();
+                updateTablaPag();
+                //updateMem();
+                resetOutput();
 
-            //sim.InitMarcos(genMarcosInit(sim.numMarcos));
-            sim.InitMarcos(MemRow.parse(memList));
+                //sim.InitMarcos(genMarcosInit(sim.numMarcos));
+
+                sim.InitMarcos(MemRow.parse(memList));
+
+                //instruc = genInstruc(sim.tamProc, 10);
+                instruc = InstRow.parse(instList);
+
+                sim.alg = method.Text == "FIFO" ? PagBajoDem.FIFO : PagBajoDem.LRU;
+
+                Console.WriteLine("Creando nuevo thread...");
+                t = new Thread(new ThreadStart(Run));
+                t.Start();
+            }
+            else
+            {
+                using (var dialog_error = new Ookii.Dialogs.Wpf.TaskDialog())
+                {
+                    dialog_error.WindowTitle = "Error";
+                    dialog_error.Content = "No existe marco vacio en memoria para ejecutar la simulación.";
+
+                    var continueButton = new Ookii.Dialogs.Wpf.TaskDialogButton("Continue");
+                    dialog_error.CustomMainIcon = SystemIcons.Warning;
+                    dialog_error.Buttons.Add(continueButton);
+
+                    Ookii.Dialogs.Wpf.TaskDialogButton button = dialog_error.ShowDialog();
+                    //if (button == continueButton)
+                    return;
+                }
+            }
             
-            //instruc = genInstruc(sim.tamProc, 10);
-            instruc = InstRow.parse(instList);
-
-            sim.alg = method.Text == "FIFO" ? PagBajoDem.FIFO : PagBajoDem.LRU;
-
-            Console.WriteLine("Creando nuevo thread...");
-            t = new Thread(new ThreadStart(Run));
-            t.Start();
         }
 
         private void reset_Click(object sender, RoutedEventArgs e)
@@ -244,11 +271,12 @@ namespace PaginationSimulator
             try
             {
                 t.Abort();
-            }catch(ThreadAbortException)
+            }
+            catch (ThreadAbortException)
             {
                 Console.WriteLine("ERROR: Thread no pudo abortarse");
             }
-            
+
             mrse.Set();
             sim.Clear();
         }
@@ -536,10 +564,17 @@ namespace PaginationSimulator
 
         public static bool[] parse(ObservableCollection<MemRow> m)
         {
+            foreach (MemRow item in m)
+            {
+                if (item.okupa == "Proceso")
+                {
+                    item.okupa = "Libre";
+                }
+            }
             bool[] marcos = new bool[m.Count];
             for (int i = 0; i < m.Count; i++)
                 marcos[i] = m[i].okupa == "Libre";
-            return marcos;
+            return marcos; 
         }
 
         public void FromMarco(byte marco)
